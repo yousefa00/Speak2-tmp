@@ -5,7 +5,18 @@ api.setListener(new MesiboListener());
 api.setCredentials(accessToken);
 api.start();
 
+let button = document.querySelector('#button')
+
+button.addEventListener('click', ()=>{
+	printText()
+})
+
 function MesiboListener() {
+}
+
+function printText() {
+	let view = document.querySelector('#chatText').value
+	console.log(view);
 }
 
 MesiboListener.prototype.Mesibo_OnConnectionStatus = function(status, value) {
