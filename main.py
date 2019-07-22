@@ -34,6 +34,12 @@ class ElementsPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/elements.html')
         self.response.write(index_template.render())
 
+class ChatPage(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/chatroom.html')
+        self.response.write(index_template.render())
+
 class UserPage(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
@@ -67,4 +73,4 @@ class LogInPage(webapp2.RequestHandler):
 # the app configuration section
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic.html', GenericPage), ('/index.html', MainPage), ('/elements.html', ElementsPage),
-     ('/users', UserPage), ('/login', LogInPage)], debug=True)
+     ('/users', UserPage), ('/login', LogInPage), ('/chatroom', ChatPage)], debug=True)
