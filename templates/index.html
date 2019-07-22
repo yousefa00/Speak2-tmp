@@ -32,10 +32,16 @@
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
 							<h1>Welcome to Speak2</h1>
-							<p>Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
-							and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</p>
+							<p>Get matched with another bilingual anywhere around the world
+ 							<br />
+						and begin your journey to trilingualism. </p>
 							<ul class="actions">
-								<li><a href="/login" class="button scrolly">Log In</a></li>
+								{% if user %}
+					      <li><a href="{{logout_url}}" class="button scrolly">Log Out</a></li>
+					      {% else %}
+					      <li><a href="{{login_url}}" class="button scrolly">Log In</a></li>
+					      {% endif %}
+
 							</ul>
 						</div>
 					</section>
@@ -47,7 +53,7 @@
 							<div class="content">
 								<div class="inner">
 									<h2>About Us</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<p>The only unique, welcoming community that fosters relationships between bilinguals in order to strengthen a current known language or learn a new one.</p>
 								</div>
 							</div>
 						</section>
