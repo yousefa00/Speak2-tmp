@@ -22,6 +22,18 @@ class MainPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/index.html')
         self.response.write(index_template.render())
 
+class GenericPage(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/generic.html')
+        self.response.write(index_template.render())
+
+class ElementsPage(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/elements.html')
+        self.response.write(index_template.render())
+
 class UserPage(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
@@ -51,11 +63,8 @@ class LogInPage(webapp2.RequestHandler):
         }
         self.response.write(index_template.render(values))
 
-    
 
 # the app configuration section
 app = webapp2.WSGIApplication([
-    ('/', MainPage),
-    ('/user', UserPage),
-    ('/login', LogInPage)
-], debug=True)
+    ('/', MainPage), ('/generic.html', GenericPage), ('/index.html', MainPage), ('/elements.html', ElementsPage),
+     ('/users', UserPage), ('/login', LogInPage)], debug=True)
