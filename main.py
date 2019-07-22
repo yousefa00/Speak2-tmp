@@ -52,7 +52,6 @@ class ElementsPage(webapp2.RequestHandler):
         self.response.write(index_template.render())
 
 class ChatPage(webapp2.RequestHandler):
-    def get(self): #for a get request
         def get(self):
             user = users.get_current_user()
             self.response.headers['Content-Type'] = 'text/html'
