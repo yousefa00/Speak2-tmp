@@ -23,7 +23,7 @@ class Message(ndb.Model):
     # A database entry representing a message
     sentFrom = ndb.StringProperty()
     sentTo = ndb.StringProperty()
-    msg = ndb.StringProperty(repeated=True)
+    msg = ndb.StringProperty()
     timeSent = ndb.StringProperty()
 
 # the handler section
@@ -54,13 +54,19 @@ class ElementsPage(webapp2.RequestHandler):
 class ChatPage(webapp2.RequestHandler):
         def get(self):
             user = users.get_current_user()
-            self.response.headers['Content-Type'] = 'text/html'
-            index_template = JINJA_ENV.get_template('templates/chatroom.html')
-            otherUser = self.request.get("id")
-            data = {
-                'messages': Message.query(ndb.OR(ndb.AND(user.user_id() == Message.sentFrom, otherUser == Message.sentTo), ndb.AND(user.user_id() == Message.sentTo, otherUser == Message.sentFrom)).order(Message.timeSent, Message.msg))
-            }
-            self.response.write(index_template.render(data))
+            if user:
+                self.response.headers['Content-Type'] = 'text/html'
+                index_template = JINJA_ENV.get_template('templates/chatroom.html')
+                otherUser = self.request.get("id")
+                data = {
+                    'messages': Message.query(
+                        ndb.OR(ndb.AND(user.user_id() == Message.sentFrom, otherUser == Message.sentTo),
+                               ndb.AND(user.user_id() == Message.sentTo, otherUser == Message.sentFrom)))
+                               .order(Message.timeSent, Message.msg).fetch()
+                }
+                self.response.write(index_template.render(data))
+            else:
+                self.redirect('/')
 
         def post(self):
             user = users.get_current_user()
@@ -72,7 +78,7 @@ class ChatPage(webapp2.RequestHandler):
             new_msg.put()
             # redirect to '/' so that the get() version of this handler will run
             # and show the list of dogs.
-            self.redirect('/chatroom.html')
+            self.redirect('/chatroom')
 
 
 class UserPage(webapp2.RequestHandler):
