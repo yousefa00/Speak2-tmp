@@ -1,22 +1,24 @@
-var api = new Mesibo();
 let accessToken = "1hr8j5udwb4oye1gsbm3s7g41oalvnuudj984z4m50txiasu9b06g3ed1ikgnspe"
+var api = new Mesibo();
 api.setAppName("console");
 api.setListener(new MesiboListener());
 api.setCredentials(accessToken);
 api.start();
 
-let button = document.querySelector('#button')
+let button = document.querySelector('#button');
+var userMessage = document.querySelector('#chatText').value;
+var adminUser = 13129612665;
+
+function printText() {
+	console.log(view);
+}
 
 button.addEventListener('click', ()=>{
-	printText()
+	printText();
+  sendTextMessage(adminUser, userMessage);
 })
 
 function MesiboListener() {
-}
-
-function printText() {
-	let view = document.querySelector('#chatText').value
-	console.log(view);
 }
 
 MesiboListener.prototype.Mesibo_OnConnectionStatus = function(status, value) {
@@ -30,4 +32,11 @@ MesiboListener.prototype.Mesibo_OnMessageStatus = function(m) {
 
 MesiboListener.prototype.Mesibo_OnMessage = function(m, data) {
 	console.log("TestNotify.prototype.Mesibo_OnMessage: from "  + m.peer);
+}
+
+function sendTextMessage(to, message) {
+	var p = {};
+       	p.peer = to;
+	var id = parseInt(Math.random()*10000);
+	api.sendMessage(p, id, message);
 }
