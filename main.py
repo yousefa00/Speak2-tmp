@@ -37,9 +37,34 @@ class ElementsPage(webapp2.RequestHandler):
 class UserPage(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
-        index_template = JINJA_ENV.get_template('templates/user.html')
+        index_template = JINJA_ENV.get_template('templates/generic.html')
+        self.response.write(index_template.render())
+    # def get(self): #for a get request
+    #     user = users.get_current_user()
+    #     self.response.headers['Content-Type'] = 'text/html'
+    #     index_template = JINJA_ENV.get_template('templates/user.html')
+    #     values ={
+    #     'user': user,
+    #     'login_url': users.create_login_url('/user'),
+    #     'logout_url': users.create_logout_url('/user'),
+    #     }
+    #     self.response.write(index_template.render(values))
+    #
+    # def post(self):
+class LogInPage(webapp2.RequestHandler):
+    def get(self): #for a get request
+        user = users.get_current_user()
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/login.html')
+        values ={
+        'user': user,
+        'login_url': users.create_login_url('/login'),
+        'logout_url': users.create_logout_url('/login'),
+        }
+        self.response.write(index_template.render(values))
+
 
 # the app configuration section
 app = webapp2.WSGIApplication([
-    ('/', MainPage), ('/generic.html', GenericPage), ('/index.html', MainPage), ('/elements.html', ElementsPage), ('/users', UserPage)
-], debug=True)
+    ('/', MainPage), ('/generic.html', GenericPage), ('/index.html', MainPage), ('/elements.html', ElementsPage),
+     ('/users', UserPage), ('/login', LogInPage)], debug=True)
