@@ -68,10 +68,15 @@ class LogInPage(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/login.html')
+class SettingsPage(webapp2.RequestHandler):
+    def get(self): #for a get request
 
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/settings.html')
 
 
 # the app configuration section
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
-     ('/users', UserPage), ('/chatroom', ChatPage)], debug=True)
+     ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage)
+     ], debug=True)
