@@ -35,7 +35,12 @@
 							<p>Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
 							and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</p>
 							<ul class="actions">
-								<li><a href="/login" class="button scrolly">Log In</a></li>
+								{% if user %}
+					      <li><a href="{{logout_url}}" class="button scrolly">Log Out</a></li>
+					      {% else %}
+					      <li><a href="{{login_url}}" class="button scrolly">Log In</a></li>
+					      {% endif %}
+
 							</ul>
 						</div>
 					</section>
