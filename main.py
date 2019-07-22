@@ -14,7 +14,7 @@ JINJA_ENV = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
-    
+
 # the handler section
 class MainPage(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -22,7 +22,14 @@ class MainPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/index.html')
         self.response.write(index_template.render())
 
+class UserPage(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/user.html')
+        self.response.write(index_template.render())
+
 # the app configuration section
 app = webapp2.WSGIApplication([
-    ('/', MainPage)
+    ('/', MainPage),
+    ('/users', UserPage)
 ], debug=True)
