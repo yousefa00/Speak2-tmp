@@ -59,7 +59,7 @@ class ChatPage(webapp2.RequestHandler):
             index_template = JINJA_ENV.get_template('templates/chatroom.html')
             otherUser = self.request.get("id")
             data = {
-                'messages': Message.query(ancestor=root_parent(), ndb.OR(ndb.AND(user.user_id() == Message.sentFrom, otherUser == Message.sentTo), ndb.AND(user.user_id() == Message.sentTo, otherUser == Message.sentFrom)).order(Message.timeSent, Message.msg))
+                'messages': Message.query(ndb.OR(ndb.AND(user.user_id() == Message.sentFrom, otherUser == Message.sentTo), ndb.AND(user.user_id() == Message.sentTo, otherUser == Message.sentFrom)).order(Message.timeSent, Message.msg))
             }
             self.response.write(index_template.render(data))
 
