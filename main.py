@@ -73,11 +73,13 @@ class LogInPage(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/login.html')
+
 class SettingsPage(webapp2.RequestHandler):
     def get(self): #for a get request
 
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
+        self.response.write(index_template.render())
 
 class SearchPage(webapp2.RequestHandler):
     def get(self): #for a get request
