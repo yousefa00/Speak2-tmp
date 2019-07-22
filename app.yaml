@@ -1,0 +1,27 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /assests/main.css
+  static_dir: assets/css
+- url: /assests/fontawesome-all.min.css
+  static_dir: assets/css
+- url: /assests/noscript.css
+  static_dir: assets/css
+- url: /assests/images/intro.svg
+  static_dir: assets/css/images
+- url: /assests/breakpoints.min.js
+  static_dir: assets/js
+- url: /assests/.js
+  static_dir: assets/js
+- url: /assests/.min.js
+  static_dir: assets/js
+- url: /.*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
