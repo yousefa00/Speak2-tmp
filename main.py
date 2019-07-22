@@ -66,5 +66,5 @@ class LogInPage(webapp2.RequestHandler):
 
 # the app configuration section
 app = webapp2.WSGIApplication([
-    ('/', MainPage), ('/generic.html', GenericPage), ('/index.html', MainPage), ('/elements.html', ElementsPage),
+    ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/login', LogInPage)], debug=True)
