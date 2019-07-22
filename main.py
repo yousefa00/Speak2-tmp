@@ -34,7 +34,12 @@ class ElementsPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/elements.html')
         self.response.write(index_template.render())
 
+class UserPage(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/user.html')
+
 # the app configuration section
 app = webapp2.WSGIApplication([
-    ('/', MainPage), ('/generic.html', GenericPage), ('/index.html', MainPage), ('/elements.html', ElementsPage)
+    ('/', MainPage), ('/generic.html', GenericPage), ('/index.html', MainPage), ('/elements.html', ElementsPage), ('/users', UserPage)
 ], debug=True)
