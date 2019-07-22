@@ -125,6 +125,7 @@ class SearchPage(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/search.html')
+        self.response.write(index_template.render())
 
 
 # the app configuration section
