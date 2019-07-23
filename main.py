@@ -155,11 +155,20 @@ class SettingsPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/settings.html')
         listofusers = User.query(User.id == user.user_id()).fetch()
 
-        values = {
-        'user': user,
-        'logout_url': users.create_logout_url('/'),
-        'printuser' : listofusers[0]
-        }
+        test = ""
+
+        if len(listofusers) > 0:
+            values = {
+            'user': user,
+            'logout_url': users.create_logout_url('/'),
+            'printuser' : listofusers[0]
+            }
+        else:
+            values = {
+            'user': user,
+            'logout_url': users.create_logout_url('/'),
+            'printuser' : test
+            }
         self.response.write(index_template.render(values))
 
     def post(self):
