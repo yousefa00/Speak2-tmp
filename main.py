@@ -33,6 +33,16 @@ def allToDict(messages):
         out.append(toDict(msg))
     return out
 
+class User(ndb.Model):
+    # A database entry representing a message
+    full_name = ndb.StringProperty()
+    id = ndb.StringProperty()
+    languages_spoken = ndb.StringProperty(repeated=True)
+    languages_to_learn = ndb.StringProperty(repeated=True)
+    friends = ndb.StringProperty(repeated=True)
+    timeSent = ndb.StringProperty()
+
+
 class Message(ndb.Model):
     # A database entry representing a message
     sentFrom = ndb.StringProperty()
@@ -48,7 +58,7 @@ class MainPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/index.html')
         values ={
         'user': user,
-        'login_url': users.create_login_url('/users'),
+        'login_url': users.create_login_url('/settings'),
         'logout_url': users.create_logout_url('/'),
         }
         self.response.write(index_template.render(values))
@@ -130,9 +140,16 @@ class SettingsPage(webapp2.RequestHandler):
 
 class SearchPage(webapp2.RequestHandler):
     def get(self): #for a get request
-        user = users.get_current_user()
+
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/search.html')
+        self.response.write(index_template.render())
+
+class IntermediatePage(webapp2.RequestHandler):
+    def get(self): #for a get request
+        user = users.get_current_user()
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/intermediate.html')
         values ={
         'user': user,
         'logout_url': users.create_logout_url('/'),
@@ -158,5 +175,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage)
      ], debug=True)

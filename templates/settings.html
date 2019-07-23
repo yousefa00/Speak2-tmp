@@ -21,7 +21,7 @@
 					<ul>
 						<li><a href="index">Home</a></li>
 						<li><a href="users">Dashboard</a></li>
-            <li><a href="chatroom">Your Chats</a></li>
+            <li><a href="chats">Your Chats</a></li>
             <li><a href="settings" class="active">Settings</a></li>
             <li><a href="{{logout_url}}" class="button scrolly">Log Out</a></li>
 					</ul>
@@ -38,7 +38,57 @@
 
 	         <h1 class="major">Settings</h1>
 
-				    <div class="dropdown">
+
+
+
+
+							 <form method="post" action="#">
+							 	<div class="row gtr-uniform">
+							 		<div class="col-6 col-12-xsmall">
+							 			<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+							 		</div>
+
+							 		<div class="col-12">
+							 			<select name="demo-category" id="demo-category">
+							 				<option value="">- Languages Proficient -</option>
+							 				<option value="1">Language 1</option>
+							 				<option value="1"> Language 2</option>
+							 				<option value="1">Language 3</option>
+							 				<option value="1">Language 4</option>
+							 			</select>
+							 		</div>
+							 		<div class="col-4 col-12-small">
+							 			<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+							 			<label for="demo-priority-low">Elementary</label>
+							 		</div>
+							 		<div class="col-4 col-12-small">
+							 			<input type="radio" id="demo-priority-normal" name="demo-priority">
+							 			<label for="demo-priority-normal">Intermediate</label>
+							 		</div>
+							 		<div class="col-4 col-12-small">
+							 			<input type="radio" id="demo-priority-high" name="demo-priority">
+							 			<label for="demo-priority-high">Fluent</label>
+							 		</div>
+
+									<div class="col-12">
+										<select name="demo-category" id="demo-category">
+											<option value="">- Hoping to Learn -</option>
+											<option value="1">Language 1</option>
+											<option value="1"> Language 2</option>
+											<option value="1">Language 3</option>
+											<option value="1">Language 4</option>
+										</select>
+									</div>
+
+							 		<div class="col-12">
+							 			<ul class="actions">
+							 				<li><input type="submit" value="Submit" class="primary" /></li>
+							 				<li><input type="reset" value="Reset" /></li>
+							 			</ul>
+							 		</div>
+							 	</div>
+							 </form>
+				    <!-- <div class="dropdown">
 				    <button class="side" class="button fit">Proficient Languages</button>
 				    <div id="language" class="dropdown-content">
 				      <a href="#">Link 1</a>
@@ -52,14 +102,9 @@
 				      <a href="#">Language 2</a>
 				      <a href="#">Language 3</a>
 				    </div>
-					
-        </div>
-      <p>,........Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-                  <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
-              </div>
           </section>
 
-	  </div>
+				  </div> -->
 		<!-- Footer -->
 			<footer id="footer" class="wrapper alt">
 				<div class="inner">
