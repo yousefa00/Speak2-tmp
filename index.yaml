@@ -11,6 +11,18 @@ indexes:
 # your application using appcfg.py.
 
 - kind: Message
+  properties:
+  - name: sentFrom
+  - name: sentTo
+  - name: timeSent
+  - name: msg
+
+- kind: Message
+  properties:
+  - name: timeSent
+  - name: msg
+
+- kind: Message
   ancestor: yes
   properties:
   - name: timeSent
