@@ -128,11 +128,11 @@ class UserPage(webapp2.RequestHandler):
     #
     # def post(self):
 
-class LogInPage(webapp2.RequestHandler):
-    def get(self): #for a get request
-
-        self.response.headers['Content-Type'] = 'text/html'
-        index_template = JINJA_ENV.get_template('templates/login.html')
+# class LogInPage(webapp2.RequestHandler):
+#     def get(self): #for a get request
+#
+#         self.response.headers['Content-Type'] = 'text/html'
+#         index_template = JINJA_ENV.get_template('templates/login.html')
 
 class SettingsPage(webapp2.RequestHandler):
     def get(self): #for a get request
