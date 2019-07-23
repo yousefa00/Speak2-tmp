@@ -37,9 +37,9 @@ class User(ndb.Model):
     # A database entry representing a message
     full_name = ndb.StringProperty()
     id = ndb.StringProperty()
-    languages_spoken = ndb.StringProperty(repeated=True)
-    languages_to_learn = ndb.StringProperty(repeated=True)
-    friends = ndb.StringProperty(repeated=True)
+    languages_spoken = ndb.StringProperty()#repeated=True
+    languages_to_learn = ndb.StringProperty()#repeated=True
+    friends = ndb.StringProperty()#repeated=True
     timeSent = ndb.StringProperty()
 
 
@@ -132,11 +132,25 @@ class SettingsPage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
-        values ={
+
+        values = {
         'user': user,
         'logout_url': users.create_logout_url('/'),
         }
         self.response.write(index_template.render(values))
+
+    def post(self):
+        user = users.get_current_user()
+
+        newUser = User(parent=root_parent())
+        newUser.full_name = self.request.get('name')
+        newUser.id = user.user_id()
+        newUser.languages_spoken = self.request.get('spoken')
+        newUser.languages_to_learn = self.request.get('learn')
+        newUser.timeSent = str(datetime.datetime.now())
+        newUser.put()
+
+        self.redirect('/settings')
 
 class SearchPage(webapp2.RequestHandler):
     def get(self): #for a get request
