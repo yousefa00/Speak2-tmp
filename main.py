@@ -19,6 +19,20 @@ JINJA_ENV = jinja2.Environment(
 def root_parent():
     return ndb.Key('Parent', 'default_parent')
 
+def toDict(msg):
+    return {
+    'sentFrom': msg.sentFrom,
+    'sentTo': msg.sentTo,
+    'msg': msg.msg,
+    'timeSent': msg.timeSent
+    }
+
+def allToDict(messages):
+    out = []
+    for msg in messages:
+        out.append(toDict(msg))
+    return out
+
 class Message(ndb.Model):
     # A database entry representing a message
     sentFrom = ndb.StringProperty()
@@ -57,14 +71,8 @@ class ChatPage(webapp2.RequestHandler):
             if user:
                 self.response.headers['Content-Type'] = 'text/html'
                 index_template = JINJA_ENV.get_template('templates/chatroom.html')
-                otherUser = self.request.get("id")
-                data = {
-                    'messages': Message.query(
-                        ndb.OR(ndb.AND(user.user_id() == Message.sentFrom, otherUser == Message.sentTo),
-                               ndb.AND(user.user_id() == Message.sentTo, otherUser == Message.sentFrom)))
-                               .order(Message.timeSent, Message.msg).fetch()
-                }
-                self.response.write(index_template.render(data))
+
+                self.response.write(index_template.render())
             else:
                 self.redirect('/')
 
@@ -131,9 +139,24 @@ class SearchPage(webapp2.RequestHandler):
         }
         self.response.write(index_template.render(values))
 
+class AjaxGetMessages(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        otherUser = self.request.get("id")
+        # Part of broken query:
+        # ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
+        #        ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)))
+        data = {
+            'messages': allToDict(Message.query().order(Message.timeSent, Message.msg).fetch())
+        }
+        self.response.headers['Content-Type'] = 'application/json'
+        print(data)
+        self.response.write(json.dumps(data))
+
 
 # the app configuration section
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
-     ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage)
+     ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),
      ], debug=True)
