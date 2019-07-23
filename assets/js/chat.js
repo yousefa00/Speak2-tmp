@@ -9,10 +9,13 @@ function fetchMessage() {
   console.log("wow")
   fetch('/ajax/AjaxGetMessages')
     .then(function(response) {
+      console.log("5")
       return response.json();
     })
     .then(function(myJson) {
-      if (myJson.length > 0){
+      console.log(myJson.messages)
+      console.log(myJson.messages.length)
+      if (myJson.messages.length > 0){
         console.log('bkafjknsdjfnjsdnfs')
         msgs = myJson
         table.innerHTML = "";
