@@ -19,6 +19,15 @@ JINJA_ENV = jinja2.Environment(
 def root_parent():
     return ndb.Key('Parent', 'default_parent')
 
+class User(ndb.Model):
+    # A database entry representing a message
+    full_name = ndb.StringProperty()
+    id = ndb.StringProperty()
+    languages_spoken = ndb.StringProperty(repeated=True)
+    languages_to_learn = ndb.StringProperty(repeated=True)
+    friends = ndb.StringProperty(repeated=True)
+    timeSent = ndb.StringProperty()
+
 class Message(ndb.Model):
     # A database entry representing a message
     sentFrom = ndb.StringProperty()
