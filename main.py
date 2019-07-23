@@ -41,6 +41,7 @@ class User(ndb.Model):
     languages_to_learn = ndb.StringProperty()#repeated=True
     friends = ndb.StringProperty()#repeated=True
     timeSent = ndb.StringProperty()
+    language_proficiency = ndb.StringProperty()
 
 
 class Message(ndb.Model):
@@ -63,6 +64,7 @@ class MainPage(webapp2.RequestHandler):
         }
         if user:
             print "blah blah blah" + str(user.user_id())
+        User.query(ancestor=root_parent()).fetch(),
         self.response.write(index_template.render(values))
 
 class GenericPage(webapp2.RequestHandler):
@@ -124,6 +126,21 @@ class UserPage(webapp2.RequestHandler):
     #     self.response.write(index_template.render(values))
     #
     # def post(self):
+class AddUser(webapp2.RequestHandler):
+    def post(self):
+        user = users.get_current_user()
+
+        other_new_user = User(parent=root_parent())
+        other_new_user.full_name = self.request.get('name')
+        other_new_user.id = user.user_id()
+        other_new_user.languages_spoken = self.request.get('spoken')
+        other_new_user.languages_to_learn = self.request.get('learn')
+        other_new_user.language_proficiency = self.request.get('proguy')
+        other_new_user.timeSent = str(datetime.datetime.now())
+        other_new_user.put()
+
+        self.redirect('/settings')
+
 class LogInPage(webapp2.RequestHandler):
     def get(self): #for a get request
 
@@ -151,6 +168,7 @@ class SettingsPage(webapp2.RequestHandler):
         newUser.languages_spoken = self.request.get('spoken')
         newUser.languages_to_learn = self.request.get('learn')
         newUser.timeSent = str(datetime.datetime.now())
+        newUser.language_proficiency = self.request.get('proguy')
         newUser.put()
 
         self.redirect('/settings')
@@ -192,5 +210,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage)
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add-user', AddUser)
      ], debug=True)
