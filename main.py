@@ -61,6 +61,8 @@ class MainPage(webapp2.RequestHandler):
         'login_url': users.create_login_url('/settings'),
         'logout_url': users.create_logout_url('/'),
         }
+        if user:
+            print "blah blah blah" + str(user.user_id())
         self.response.write(index_template.render(values))
 
 class GenericPage(webapp2.RequestHandler):
@@ -88,15 +90,16 @@ class ChatPage(webapp2.RequestHandler):
 
         def post(self):
             user = users.get_current_user()
+            print("test", user.user_id())
             new_msg = Message(parent=root_parent())
             new_msg.sentFrom = user.user_id()
-            new_msg.sendTo = self.request.get("id")
+            new_msg.sentTo = str(self.request.get("id"))
             new_msg.msg = self.request.get("chatText")
             new_msg.timeSent = str(datetime.datetime.now())
             new_msg.put()
             # redirect to '/' so that the get() version of this handler will run
             # and show the list of dogs.
-            self.redirect('/chatroom')
+            self.redirect('/chatroom?id=' + self.request.get("id"))
 
 
 class UserPage(webapp2.RequestHandler):
