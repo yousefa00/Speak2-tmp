@@ -6,17 +6,12 @@ function startTimer() {
 }
 
 function fetchMessage() {
-  console.log("wow")
   fetch('/ajax/AjaxGetMessages')
     .then(function(response) {
-      console.log("5")
       return response.json();
     })
     .then(function(myJson) {
-      console.log(myJson.messages)
-      console.log(myJson.messages.length)
       if (myJson.messages.length > 0){
-        console.log('bkafjknsdjfnjsdnfs')
         msgs = myJson
         table.innerHTML = "";
         for (let i = 0; i < msgs.messages.length; i++) {
@@ -27,6 +22,7 @@ function fetchMessage() {
             cell.innerHTML = ""
             let cell2 = row.insertCell()
             cell2.innerHTML = msgs.messages[i].msg
+            cell2.style.textAlign = "right"
           } else {
             let cell = row.insertCell()
             cell.innerHTML = msgs.messages[i].msg
