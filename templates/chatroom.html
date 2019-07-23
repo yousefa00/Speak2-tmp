@@ -10,8 +10,32 @@
 </head>
   <body>
     <form method="post">
-      <input id="demo-message" name="chatText" type="text">
-      <input type="submit">run</button>
+      <div class="table-wrapper">
+        <table class="alt" id="msgTable">
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <script type="text/javascript">
+        let msgs = {{messages}}
+        table1 = document.querySelector('#msgTable')
+        for (let msgIndex in msgs) {
+          let row = table1.insertRow()
+          if (msgs[msgIndex].sendTo == urlParams.get('id')){
+            let cell = row.insertCell()
+            cell.innerHTML = ""
+            let cell2 = row.insertCell()
+            cell2.innerHTML = msgs[msgIndex].msg
+          } else {
+            let cell = row.insertCell()
+            cell.innerHTML = msgs[msgIndex].msg
+            let cell2 = row.insertCell()
+            cell2.innerHTML = ""
+          }
+        }
+      </script>
+      <input id="chatText" name="chatText" type="text">
+      <input value="Send"type="submit">
     </form>
     <a href="users" class="button">Dashboard</a>
 
