@@ -128,11 +128,11 @@ class UserPage(webapp2.RequestHandler):
     #
     # def post(self):
 
-class LogInPage(webapp2.RequestHandler):
-    def get(self): #for a get request
-
-        self.response.headers['Content-Type'] = 'text/html'
-        index_template = JINJA_ENV.get_template('templates/login.html')
+# class LogInPage(webapp2.RequestHandler):
+#     def get(self): #for a get request
+#
+#         self.response.headers['Content-Type'] = 'text/html'
+#         index_template = JINJA_ENV.get_template('templates/login.html')
 
 class SettingsPage(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -176,10 +176,14 @@ class SettingsPage(webapp2.RequestHandler):
 
 class SearchPage(webapp2.RequestHandler):
     def get(self): #for a get request
-
         self.response.headers['Content-Type'] = 'text/html'
+        queryName = self.request.get('val')
+        listofusers = User.query(ndb.OR(queryName == User.full_name, queryName == User.languages_spoken)).fetch()
+        values = {
+        'listofusers' : listofusers
+        }
         index_template = JINJA_ENV.get_template('templates/search.html')
-        self.response.write(index_template.render())
+        self.response.write(index_template.render(values))
 
 class IntermediatePage(webapp2.RequestHandler):
     def get(self): #for a get request
