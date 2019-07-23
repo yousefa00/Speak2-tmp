@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Results</title>
+		<title>Chats</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,10 +19,11 @@
 				<a href="index" class="title">Speak2</a>
 				<nav>
 					<ul>
-            <li><a href="users"> {% if user %} Dashboard {% endif %} </a></li>
-  					<li><a href="chats"> {% if user %} Your Chats {% endif %} </a></li>
-  					<li><a href="settings">{% if user %} Settings {% endif %} </a></li>
             <li><a href="index"> Home </a></li>
+            <li><a href="users"> Dashboard</a></li>
+  					<li><a href="chats" class = "active"> Your Chats</a></li>
+  					<li><a href="settings">Settings </a></li>
+            <li><a href="{{logout_url}}" class="button scrolly">Log Out</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -33,7 +34,7 @@
 				<!-- Main -->
 					<section id="main" class="wrapper">
 						<div class="inner">
-							<h1 class="major">Search Results</h1>
+							<h1 class="major">Your Chats</h1>
               <!-- Table -->
                 <section>
                   <div class="table-wrapper">
@@ -43,6 +44,7 @@
                           <th>Name</th>
                           <th>Languages Proficient</th>
                           <th>Hoping to Learn</th>
+                          <th>Go to Chatroom</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -50,26 +52,31 @@
                           <td>Item One</td>
                           <td>Ante turpis integer aliquet porttitor.</td>
                           <td>29.99</td>
+                          <td><a href="chatroom" class="button fit">Select</a></td>
                         </tr>
                         <tr>
                           <td>Item Two</td>
                           <td>Vis ac commodo adipiscing arcu aliquet.</td>
                           <td>19.99</td>
+                          <td><a href="chatroom" class="button fit">Select</a></td>
                         </tr>
                         <tr>
                           <td>Item Three</td>
                           <td> Morbi faucibus arcu accumsan lorem.</td>
                           <td>29.99</td>
+                          <td><a href="chatroom" class="button fit">Select</a></td>
                         </tr>
                         <tr>
                           <td>Item Four</td>
                           <td>Vitae integer tempus condimentum.</td>
                           <td>19.99</td>
+                          <td><a href="chatroom" class="button fit">Select</a></td>
                         </tr>
                         <tr>
                           <td>Item Five</td>
                           <td>Ante turpis integer aliquet porttitor.</td>
                           <td>29.99</td>
+                          <td><a href="chatroom" class="button fit">Select</a></td>
                         </tr>
                       </tbody>
                       <tfoot>
