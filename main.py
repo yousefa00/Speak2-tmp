@@ -19,6 +19,15 @@ JINJA_ENV = jinja2.Environment(
 def root_parent():
     return ndb.Key('Parent', 'default_parent')
 
+class User(ndb.Model):
+    # A database entry representing a message
+    full_name = ndb.StringProperty()
+    id = ndb.StringProperty()
+    languages_spoken = ndb.StringProperty(repeated=True)
+    languages_to_learn = ndb.StringProperty(repeated=True)
+    friends = ndb.StringProperty(repeated=True)
+    timeSent = ndb.StringProperty()
+
 class Message(ndb.Model):
     # A database entry representing a message
     sentFrom = ndb.StringProperty()
@@ -34,7 +43,7 @@ class MainPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/index.html')
         values ={
         'user': user,
-        'login_url': users.create_login_url('/users'),
+        'login_url': users.create_login_url('/settings'),
         'logout_url': users.create_logout_url('/'),
         }
         self.response.write(index_template.render(values))
