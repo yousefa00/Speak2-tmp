@@ -31,16 +31,10 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-
 				<!-- Main -->
 	      <section id="main" class="wrapper">
 	         <div class="inner">
-
 	         <h1 class="major">Settings</h1>
-
-
-
-
 
 							 <form method="post" action="action="myphp.php"">
 							 	<div class="row gtr-uniform">
@@ -52,7 +46,7 @@
 							 			<select name="spoken" id="demo-category">
 							 				<option value="">- Languages Proficient -</option>
 							 				<option value="1">Language 1</option>
-							 				<option value="1"> Language 2</option>
+							 				<option value="1">Language 2</option>
 							 				<option value="1">Language 3</option>
 							 				<option value="1">Language 4</option>
 							 			</select>
@@ -69,6 +63,9 @@
 							 			<input type="radio" id="demo-priority-high" name="demo-priority">
 							 			<label for="demo-priority-high">Fluent</label>
 							 		</div>
+									<div class="">
+										<a class="button scrolly">Add Language</a>
+									</div>
 
 									<div class="col-12">
 										<select name="learn" id="demo-category">
@@ -82,30 +79,35 @@
 
 							 		<div class="col-12">
 							 			<ul class="actions">
-							 			<li> <input type="submit" value="Submit" class="primary" /> </li> 
+							 			<li> <input type="submit" value="Submit" class="primary" /> </li>
 										<li><input type="reset" value="Reset" /></li>
 
 							 			</ul>
 							 		</div>
 							 	</div>
 							 </form>
-				    <!-- <div class="dropdown">
-				    <button class="side" class="button fit">Proficient Languages</button>
-				    <div id="language" class="dropdown-content">
-				      <a href="#">Link 1</a>
-				      <a href="#">Link 2</a>
-				      <a href="#">Link 3</a>
-				    </div>
+ <h1 class="major">Profile</h1>
+ <section>
+	 <div class="table-wrapper">
+		 <table>
+			 <thead>
+				 <tr>
+					 <th>Name</th>
+					 <th>Languages Proficient</th>
+					 <th>Hoping to Learn</th>
+				 </tr>
+			 </thead>
+			 <tbody>
+				 <tr>
+					 <td>{{user.full_name}}</td>
+					 <td>{{user.languages_spoken}}</td>
+					 <td>{{user.languages_to_learn}}</td>
+				 </tr>
+			 </tbody>
+		 </table>
+	 </div>
+</div>
 
-						<button class="side" class="button fit"> Learn Languages </button>
-				    <div id="learn-language" class="dropdown-content">
-				      <a href="#">Language 1</a>
-				      <a href="#">Language 2</a>
-				      <a href="#">Language 3</a>
-				    </div>
-          </section>
-
-				  </div> -->
 		<!-- Footer -->
 			<footer id="footer" class="wrapper alt">
 				<div class="inner">
