@@ -11,25 +11,28 @@ function fetchMessage() {
       return response.json();
     })
     .then(function(myJson) {
-
+      if (myJson.length > 0){
+        msgs = myJson
+        table.innerHTML = "";
+        for (let msgIndex in msgs) {
+          let row = table.insertRow()
+          urlParams = new URLSearchParams(window.location.search);
+          if (msgs.messages[msgIndex].sendTo == urlParams.get('id')){
+            let cell = row.insertCell()
+            cell.innerHTML = ""
+            let cell2 = row.insertCell()
+            cell2.innerHTML = msgs.messages[msgIndex].msg
+          } else {
+            let cell = row.insertCell()
+            cell.innerHTML = msgs.messages[msgIndex].msg
+            let cell2 = row.insertCell()
+            cell2.innerHTML = ""
+          }
+        }
+      }
       startTimer();
     })
 
 }
 
-// let msgs = {{messages}}
-// table1 = document.querySelector('#msgTable')
-// for (let msgIndex in msgs) {
-//   let row = table1.insertRow()
-//   if (msgs[msgIndex].sendTo == urlParams.get('id')){
-//     let cell = row.insertCell()
-//     cell.innerHTML = ""
-//     let cell2 = row.insertCell()
-//     cell2.innerHTML = msgs[msgIndex].msg
-//   } else {
-//     let cell = row.insertCell()
-//     cell.innerHTML = msgs[msgIndex].msg
-//     let cell2 = row.insertCell()
-//     cell2.innerHTML = ""
-//   }
-// }
+fetchMessage()
