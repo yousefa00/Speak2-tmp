@@ -19,17 +19,17 @@ function fetchMessage() {
         console.log('bkafjknsdjfnjsdnfs')
         msgs = myJson
         table.innerHTML = "";
-        for (let msgIndex in msgs) {
+        for (let i = 0; i < msgs.messages.length; i++) {
           let row = table.insertRow()
           urlParams = new URLSearchParams(window.location.search);
-          if (msgs.messages[msgIndex].sendTo == urlParams.get('id')){
+          if (msgs.messages[i].sentTo == urlParams.get('id')){
             let cell = row.insertCell()
             cell.innerHTML = ""
             let cell2 = row.insertCell()
-            cell2.innerHTML = msgs.messages[msgIndex].msg
+            cell2.innerHTML = msgs.messages[i].msg
           } else {
             let cell = row.insertCell()
-            cell.innerHTML = msgs.messages[msgIndex].msg
+            cell.innerHTML = msgs.messages[i].msg
             let cell2 = row.insertCell()
             cell2.innerHTML = ""
           }
