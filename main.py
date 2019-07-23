@@ -153,16 +153,21 @@ class SettingsPage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
+        listofusers = User.query(User.id == user.user_id()).fetch()
 
         values = {
         'user': user,
         'logout_url': users.create_logout_url('/'),
+        'printuser' : listofusers[0]
         }
         self.response.write(index_template.render(values))
 
     def post(self):
         user = users.get_current_user()
-
+        values = {
+        'user': user,
+        'logout_url': users.create_logout_url('/'),
+        }
         newUser = User(parent=root_parent())
         newUser.full_name = self.request.get('name')
         newUser.id = user.user_id()
@@ -210,5 +215,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add-user', AddUser)
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/adduser', AddUser)
      ], debug=True)
