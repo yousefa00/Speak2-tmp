@@ -40,14 +40,55 @@
 
 
 
-					 <form method="get" action="#">
-						 <div class="row gtr-uniform">
-							 <div class="col-6 col-12-xsmall">
-								 <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-							 </div>
 
 
-				    <div class="dropdown">
+							 <form method="post" action="#">
+							 	<div class="row gtr-uniform">
+							 		<div class="col-6 col-12-xsmall">
+							 			<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+							 		</div>
+
+							 		<div class="col-12">
+							 			<select name="demo-category" id="demo-category">
+							 				<option value="">- languages you know -</option>
+							 				<option value="1">Language 1</option>
+							 				<option value="1"> Language 2</option>
+							 				<option value="1">Language 3</option>
+							 				<option value="1">Language 4</option>
+							 			</select>
+							 		</div>
+							 		<div class="col-4 col-12-small">
+							 			<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+							 			<label for="demo-priority-low">Elementary</label>
+							 		</div>
+							 		<div class="col-4 col-12-small">
+							 			<input type="radio" id="demo-priority-normal" name="demo-priority">
+							 			<label for="demo-priority-normal">Intermediate</label>
+							 		</div>
+							 		<div class="col-4 col-12-small">
+							 			<input type="radio" id="demo-priority-high" name="demo-priority">
+							 			<label for="demo-priority-high">Fluent</label>
+							 		</div>
+
+									<div class="col-12">
+										<select name="demo-category" id="demo-category">
+											<option value="">- languages you want to learn -</option>
+											<option value="1">Language 1</option>
+											<option value="1"> Language 2</option>
+											<option value="1">Language 3</option>
+											<option value="1">Language 4</option>
+										</select>
+									</div>
+
+							 		<div class="col-12">
+							 			<ul class="actions">
+							 				<li><input type="submit" value="Submit" class="primary" /></li>
+							 				<li><input type="reset" value="Reset" /></li>
+							 			</ul>
+							 		</div>
+							 	</div>
+							 </form>
+				    <!-- <div class="dropdown">
 				    <button class="side" class="button fit">Proficient Languages</button>
 				    <div id="language" class="dropdown-content">
 				      <a href="#">Link 1</a>
@@ -63,7 +104,7 @@
 				    </div>
           </section>
 
-	  </div>
+				  </div> -->
 		<!-- Footer -->
 			<footer id="footer" class="wrapper alt">
 				<div class="inner">
