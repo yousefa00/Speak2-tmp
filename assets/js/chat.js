@@ -6,12 +6,14 @@ function startTimer() {
 }
 
 function fetchMessage() {
+  console.log("wow")
   fetch('/ajax/AjaxGetMessages')
     .then(function(response) {
       return response.json();
     })
     .then(function(myJson) {
       if (myJson.length > 0){
+        console.log('bkafjknsdjfnjsdnfs')
         msgs = myJson
         table.innerHTML = "";
         for (let msgIndex in msgs) {
