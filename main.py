@@ -153,11 +153,12 @@ class SettingsPage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
+        listofusers = User.query(User.id == user.user_id()).fetch()
 
         values = {
         'user': user,
         'logout_url': users.create_logout_url('/'),
-        'printuser' : User.query(User.id == user.user_id()).fetch()
+        'printuser' : listofusers[0]
         }
         self.response.write(index_template.render(values))
 
