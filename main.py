@@ -42,9 +42,9 @@ class MainPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/index.html')
         values ={
-            'user': user,
-            'login_url': users.create_login_url('/users'),
-            'logout_url': users.create_logout_url('/'),
+        'user': user,
+        'login_url': users.create_login_url('/settings'),
+        'logout_url': users.create_logout_url('/'),
         }
         self.response.write(index_template.render(values))
 
