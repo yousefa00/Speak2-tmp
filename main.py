@@ -41,6 +41,7 @@ class User(ndb.Model):
     languages_to_learn = ndb.StringProperty()#repeated=True
     friends = ndb.StringProperty()#repeated=True
     timeSent = ndb.StringProperty()
+    language_proficiency = ndb.StringProperty()
 
 
 class Message(ndb.Model):
@@ -61,6 +62,9 @@ class MainPage(webapp2.RequestHandler):
         'login_url': users.create_login_url('/settings'),
         'logout_url': users.create_logout_url('/'),
         }
+        if user:
+            print "blah blah blah" + str(user.user_id())
+        User.query(ancestor=root_parent()).fetch(),
         self.response.write(index_template.render(values))
 
 class GenericPage(webapp2.RequestHandler):
@@ -88,15 +92,16 @@ class ChatPage(webapp2.RequestHandler):
 
         def post(self):
             user = users.get_current_user()
+            print("test", user.user_id())
             new_msg = Message(parent=root_parent())
             new_msg.sentFrom = user.user_id()
-            new_msg.sendTo = self.request.get("id")
+            new_msg.sentTo = str(self.request.get("id"))
             new_msg.msg = self.request.get("chatText")
             new_msg.timeSent = str(datetime.datetime.now())
             new_msg.put()
             # redirect to '/' so that the get() version of this handler will run
             # and show the list of dogs.
-            self.redirect('/chatroom')
+            self.redirect('/chatroom?id=' + self.request.get("id"))
 
 
 class UserPage(webapp2.RequestHandler):
@@ -121,6 +126,21 @@ class UserPage(webapp2.RequestHandler):
     #     self.response.write(index_template.render(values))
     #
     # def post(self):
+class AddUser(webapp2.RequestHandler):
+    def post(self):
+        user = users.get_current_user()
+
+        other_new_user = User(parent=root_parent())
+        other_new_user.full_name = self.request.get('name')
+        other_new_user.id = user.user_id()
+        other_new_user.languages_spoken = self.request.get('spoken')
+        other_new_user.languages_to_learn = self.request.get('learn')
+        other_new_user.language_proficiency = self.request.get('proguy')
+        other_new_user.timeSent = str(datetime.datetime.now())
+        other_new_user.put()
+
+        self.redirect('/settings')
+
 class LogInPage(webapp2.RequestHandler):
     def get(self): #for a get request
 
@@ -148,6 +168,7 @@ class SettingsPage(webapp2.RequestHandler):
         newUser.languages_spoken = self.request.get('spoken')
         newUser.languages_to_learn = self.request.get('learn')
         newUser.timeSent = str(datetime.datetime.now())
+        newUser.language_proficiency = self.request.get('proguy')
         newUser.put()
 
         self.redirect('/settings')
@@ -189,5 +210,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage)
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add-user', AddUser)
      ], debug=True)

@@ -6,6 +6,7 @@
 -->
 <html>
 	<head>
+		<link href="https://fonts.googleapis.com/css?family=Ribeye&display=swap" rel="stylesheet">
 		<title>Settings</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -31,18 +32,12 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-
 				<!-- Main -->
 	      <section id="main" class="wrapper">
 	         <div class="inner">
+	         <h1 class="major" style= " font-family: 'Ribeye', cursive;">Settings</h1>
 
-	         <h1 class="major">Settings</h1>
-
-
-
-
-
-							 <form method="post" action="#">
+							 <form method="post" action="/settings">
 							 	<div class="row gtr-uniform">
 							 		<div class="col-6 col-12-xsmall">
 							 			<input type="text" name="name" id="demo-name" value="" placeholder="Name" />
@@ -50,13 +45,23 @@
 
 							 		<div class="col-12">
 							 			<select name="spoken" id="demo-category">
-							 				<option value="">- Languages Proficient -</option>
-							 				<option value="1">Language 1</option>
-							 				<option value="1"> Language 2</option>
-							 				<option value="1">Language 3</option>
-							 				<option value="1">Language 4</option>
+							 				<option>- Languages Proficient -</option>
+							 				<option value="Lang1">Language 1</option>
+							 				<option value="Lang2">Language 2</option>
+							 				<option value="Lang3">Language 3</option>
+							 				<option value="Lang4">Language 4</option>
 							 			</select>
 							 		</div>
+									<div class="col-12">
+							 			<select name="proguy" id="demo-category">
+							 				<option>- Proficiency -</option>
+							 				<option value="Elementary">Elementary</option>
+							 				<option value="Intermediate">Intermediate</option>
+							 				<option value="Fluent">Fluent</option>
+							 			</select>
+							 		</div>
+
+								<!-- <div name = proguy>
 							 		<div class="col-4 col-12-small">
 							 			<input type="radio" id="demo-priority-low" name="demo-priority" checked>
 							 			<label for="demo-priority-low">Elementary</label>
@@ -69,42 +74,54 @@
 							 			<input type="radio" id="demo-priority-high" name="demo-priority">
 							 			<label for="demo-priority-high">Fluent</label>
 							 		</div>
+									<div class="">
+										<a class="button scrolly">Add Language</a>
+									</div>
+								</div> -->
 
 									<div class="col-12">
 										<select name="learn" id="demo-category">
-											<option value="">- Hoping to Learn -</option>
-											<option value="1">Language 1</option>
-											<option value="1"> Language 2</option>
-											<option value="1">Language 3</option>
-											<option value="1">Language 4</option>
+											<option>- Hoping to Learn -</option>
+											<option value="Learn1">Language 1</option>
+											<option value="Learn2"> Language 2</option>
+											<option value="Learn3">Language 3</option>
+											<option value="Learn4">Language 4</option>
 										</select>
 									</div>
 
 							 		<div class="col-12">
 							 			<ul class="actions">
-							 				<li><input type="submit" value="Submit" class="primary" /></li>
-							 				<li><input type="reset" value="Reset" /></li>
+							 			<li> <input type="submit" value="Submit" class="primary" /> </li>
+										<li><input type="reset" value="Reset" /></li>
+
 							 			</ul>
 							 		</div>
 							 	</div>
 							 </form>
-				    <!-- <div class="dropdown">
-				    <button class="side" class="button fit">Proficient Languages</button>
-				    <div id="language" class="dropdown-content">
-				      <a href="#">Link 1</a>
-				      <a href="#">Link 2</a>
-				      <a href="#">Link 3</a>
-				    </div>
+ <h1 class="major" action = "/add-user" method = "post">Profile</h1>
+ <section>
+	 <div class="table-wrapper">
+		 <table>
+			 <thead>
+				 <tr>
+					 <th>Name</th>
+					 <th>Languages Proficient</th>
+					 <th>Level of Proficiency</th>
+					 <th>Hoping to Learn</th>
+				 </tr>
+			 </thead>
+			 <tbody>
+				 <tr>
+					 <td>{{user.full_name}}</td>
+					 <td>{{user.languages_spoken}}</td>
+					 <td>{{user.proguy}}</td>
+					 <td>{{user.languages_to_learn}}</td>
+					 </tr>
+			 </tbody>
+		 </table>
+	 </div>
+</div>
 
-						<button class="side" class="button fit"> Learn Languages </button>
-				    <div id="learn-language" class="dropdown-content">
-				      <a href="#">Language 1</a>
-				      <a href="#">Language 2</a>
-				      <a href="#">Language 3</a>
-				    </div>
-          </section>
-
-				  </div> -->
 		<!-- Footer -->
 			<footer id="footer" class="wrapper alt">
 				<div class="inner">
