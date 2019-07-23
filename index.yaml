@@ -21,3 +21,9 @@ indexes:
   properties:
   - name: timeSent
   - name: msg
+
+- kind: Message
+  ancestor: yes
+  properties:
+  - name: timeSent
+  - name: msg
