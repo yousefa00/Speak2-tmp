@@ -122,9 +122,16 @@ class SettingsPage(webapp2.RequestHandler):
 
 class SearchPage(webapp2.RequestHandler):
     def get(self): #for a get request
-        user = users.get_current_user()
+
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/search.html')
+        self.response.write(index_template.render())
+
+class IntermediatePage(webapp2.RequestHandler):
+    def get(self): #for a get request
+        user = users.get_current_user()
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENV.get_template('templates/intermediate.html')
         values ={
         'user': user,
         'logout_url': users.create_logout_url('/'),
@@ -135,5 +142,5 @@ class SearchPage(webapp2.RequestHandler):
 # the app configuration section
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
-     ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage)
+     ('/users', UserPage), ('/chatroom', ChatPage), ("/chats", IntermediatePage), ('/settings', SettingsPage), ('/search', SearchPage)
      ], debug=True)
