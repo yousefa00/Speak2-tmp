@@ -60,7 +60,7 @@ class MainPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/index.html')
         values ={
         'user': user,
-        'login_url': users.create_login_url('/settings'),
+        'login_url': users.create_login_url('/adduser'),
         'logout_url': users.create_logout_url('/'),
         }
         if user:
@@ -132,11 +132,11 @@ class AddUser(webapp2.RequestHandler):
         user = users.get_current_user()
 
         other_new_user = User(parent=root_parent())
-        other_new_user.full_name = self.request.get('name')
+        other_new_user.full_name = ""
         other_new_user.id = user.user_id()
-        other_new_user.languages_spoken = self.request.get('spoken')
-        other_new_user.languages_to_learn = self.request.get('learn')
-        other_new_user.language_proficiency = self.request.get('proguy')
+        other_new_user.languages_spoken = ""
+        other_new_user.languages_to_learn = ""
+        other_new_user.language_proficiency = ""
         other_new_user.timeSent = str(datetime.datetime.now())
         other_new_user.put()
 
