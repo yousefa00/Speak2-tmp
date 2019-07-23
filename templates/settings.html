@@ -98,7 +98,7 @@
 							 		</div>
 							 	</div>
 							 </form>
- <h1 class="major" action = "/add-user" method = "post">Profile</h1>
+ <h1 class="major" action = "settings" method = "get">Profile</h1>
  <section>
 	 <div class="table-wrapper">
 		 <table>
@@ -112,10 +112,10 @@
 			 </thead>
 			 <tbody>
 				 <tr>
-					 <td>{{user.full_name}}</td>
-					 <td>{{user.languages_spoken}}</td>
-					 <td>{{user.proguy}}</td>
-					 <td>{{user.languages_to_learn}}</td>
+					 <td>{{printuser[0].full_name}}</td>
+					 <td>{{printuser[0].languages_spoken}}</td>
+					 <td>{{printuser[0].language_proficiency}}</td>
+					 <td>{{printuser[0].languages_to_learn}}</td>
 					 </tr>
 			 </tbody>
 		 </table>

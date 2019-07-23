@@ -4,6 +4,7 @@ import jinja2
 import os
 import json
 import datetime
+import logging
 from google.appengine.api import urlfetch
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -92,7 +93,7 @@ class ChatPage(webapp2.RequestHandler):
 
         def post(self):
             user = users.get_current_user()
-            print("test", user.user_id())
+            logging.debug(user.user_id())
             new_msg = Message(parent=root_parent())
             new_msg.sentFrom = user.user_id()
             new_msg.sentTo = str(self.request.get("id"))
@@ -156,12 +157,16 @@ class SettingsPage(webapp2.RequestHandler):
         values = {
         'user': user,
         'logout_url': users.create_logout_url('/'),
+        'printuser' : User.query(User.id == user.user_id()).fetch()
         }
         self.response.write(index_template.render(values))
 
     def post(self):
         user = users.get_current_user()
-
+        values = {
+        'user': user,
+        'logout_url': users.create_logout_url('/'),
+        }
         newUser = User(parent=root_parent())
         newUser.full_name = self.request.get('name')
         newUser.id = user.user_id()
@@ -194,12 +199,11 @@ class IntermediatePage(webapp2.RequestHandler):
 class AjaxGetMessages(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
-        otherUser = self.request.get("id")
         # Part of broken query:
         # ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
         #        ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)))
         data = {
-            'messages': allToDict(Message.query().order(Message.timeSent, Message.msg).fetch())
+            'messages': allToDict(Message.query(ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch())
         }
         self.response.headers['Content-Type'] = 'application/json'
         print(data)
@@ -210,5 +214,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add-user', AddUser)
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/adduser', AddUser)
      ], debug=True)
