@@ -18,11 +18,12 @@
 			<a href="index" class="title">Speak2</a>
 			<nav>
 				<ul>
-					<li><a href="users">Dashboard</a></li>
+					<li><a href="search">{% if user %}Search{% endif %}</a></li>
+					<li><a href="users"> {% if user %} Dashboard {% endif %} </a></li>
 					<li><a href="#one">About Us</a></li>
 					<li><a href="#two">FAQs</a></li>
 					<li><a href="#three">Contact Us</a></li>
-					<li><a href="settings">Settings</a></li>
+					<li><a href="settings">{% if user %} Settings {% endif %} </a></li>
 				</ul>
 			</nav>
 		</header>
