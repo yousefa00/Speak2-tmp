@@ -156,12 +156,16 @@ class SettingsPage(webapp2.RequestHandler):
         values = {
         'user': user,
         'logout_url': users.create_logout_url('/'),
+        'printuser' : User.query(User.id == user.user_id()).fetch()
         }
         self.response.write(index_template.render(values))
 
     def post(self):
         user = users.get_current_user()
-
+        values = {
+        'user': user,
+        'logout_url': users.create_logout_url('/'),
+        }
         newUser = User(parent=root_parent())
         newUser.full_name = self.request.get('name')
         newUser.id = user.user_id()
@@ -210,5 +214,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add-user', AddUser)
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/adduser', AddUser)
      ], debug=True)
