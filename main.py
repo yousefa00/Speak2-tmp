@@ -199,7 +199,7 @@ class AjaxGetMessages(webapp2.RequestHandler):
         # ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
         #        ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)))
         data = {
-            'messages': allToDict(Message.query(parent=root_parent()).order(Message.timeSent, Message.msg).fetch())
+            'messages': allToDict(Message.query(ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch())
         }
         self.response.headers['Content-Type'] = 'application/json'
         print(data)
