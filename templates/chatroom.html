@@ -9,7 +9,8 @@
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
   <body>
-      <a href="users" <button class="button primary fit"> <class="button">  Dashboard </button> </a>
+      <a href="users" <button class="button fit"> <class="button">  Dashboard </button> </a>
+      <a href="chats" <button class="button fit"> <class="button">  Your Chats </button> </a>
     <form method="post">
       <div class="table-wrapper">
         <table class="alt" id="msgTable">
@@ -17,28 +18,10 @@
           </tbody>
         </table>
       </div>
-      <script type="text/javascript">
-        let msgs = {{messages}}
-        table1 = document.querySelector('#msgTable')
-        for (let msgIndex in msgs) {
-          let row = table1.insertRow()
-          if (msgs[msgIndex].sendTo == urlParams.get('id')){
-            let cell = row.insertCell()
-            cell.innerHTML = ""
-            let cell2 = row.insertCell()
-            cell2.innerHTML = msgs[msgIndex].msg
-          } else {
-            let cell = row.insertCell()
-            cell.innerHTML = msgs[msgIndex].msg
-            let cell2 = row.insertCell()
-            cell2.innerHTML = ""
-          }
-        }
-      </script>
       <input id="chatText" name="chatText" type="text">
       <input value="Send"  type="submit">
     </form>
-    
+
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/chat.js"></script>

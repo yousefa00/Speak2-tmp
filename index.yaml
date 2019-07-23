@@ -16,3 +16,8 @@ indexes:
   - name: sentTo
   - name: timeSent
   - name: msg
+
+- kind: Message
+  properties:
+  - name: timeSent
+  - name: msg
