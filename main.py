@@ -19,14 +19,29 @@ JINJA_ENV = jinja2.Environment(
 def root_parent():
     return ndb.Key('Parent', 'default_parent')
 
+def toDict(msg):
+    return {
+    'sentFrom': msg.sentFrom,
+    'sentTo': msg.sentTo,
+    'msg': msg.msg,
+    'timeSent': msg.timeSent
+    }
+
+def allToDict(messages):
+    out = []
+    for msg in messages:
+        out.append(toDict(msg))
+    return out
+
 class User(ndb.Model):
     # A database entry representing a message
     full_name = ndb.StringProperty()
     id = ndb.StringProperty()
-    languages_spoken = ndb.StringProperty(repeated=True)
-    languages_to_learn = ndb.StringProperty(repeated=True)
-    friends = ndb.StringProperty(repeated=True)
+    languages_spoken = ndb.StringProperty()#repeated=True
+    languages_to_learn = ndb.StringProperty()#repeated=True
+    friends = ndb.StringProperty()#repeated=True
     timeSent = ndb.StringProperty()
+
 
 class Message(ndb.Model):
     # A database entry representing a message
@@ -66,14 +81,8 @@ class ChatPage(webapp2.RequestHandler):
             if user:
                 self.response.headers['Content-Type'] = 'text/html'
                 index_template = JINJA_ENV.get_template('templates/chatroom.html')
-                otherUser = self.request.get("id")
-                data = {
-                    'messages': Message.query(
-                        ndb.OR(ndb.AND(user.user_id() == Message.sentFrom, otherUser == Message.sentTo),
-                               ndb.AND(user.user_id() == Message.sentTo, otherUser == Message.sentFrom)))
-                               .order(Message.timeSent, Message.msg).fetch()
-                }
-                self.response.write(index_template.render(data))
+
+                self.response.write(index_template.render())
             else:
                 self.redirect('/')
 
@@ -123,11 +132,25 @@ class SettingsPage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
-        values ={
+
+        values = {
         'user': user,
         'logout_url': users.create_logout_url('/'),
         }
         self.response.write(index_template.render(values))
+
+    def post(self):
+        user = users.get_current_user()
+
+        newUser = User(parent=root_parent())
+        newUser.full_name = self.request.get('name')
+        newUser.id = user.user_id()
+        newUser.languages_spoken = self.request.get('spoken')
+        newUser.languages_to_learn = self.request.get('learn')
+        newUser.timeSent = str(datetime.datetime.now())
+        newUser.put()
+
+        self.redirect('/settings')
 
 class SearchPage(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -147,9 +170,24 @@ class IntermediatePage(webapp2.RequestHandler):
         }
         self.response.write(index_template.render(values))
 
+class AjaxGetMessages(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        otherUser = self.request.get("id")
+        # Part of broken query:
+        # ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
+        #        ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)))
+        data = {
+            'messages': allToDict(Message.query().order(Message.timeSent, Message.msg).fetch())
+        }
+        self.response.headers['Content-Type'] = 'application/json'
+        print(data)
+        self.response.write(json.dumps(data))
+
 
 # the app configuration section
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
-     ('/users', UserPage), ('/chatroom', ChatPage), ("/chats", IntermediatePage), ('/settings', SettingsPage), ('/search', SearchPage)
+     ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage)
      ], debug=True)
