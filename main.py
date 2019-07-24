@@ -356,6 +356,7 @@ class UserPage(webapp2.RequestHandler):
 
 class FirstLoginCheck(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
         if user:
             listofusers = User.query(User.id == user.user_id()).fetch()
         if len(listofusers) > 0:
