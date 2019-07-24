@@ -65,7 +65,7 @@
                           <td>{{each_friend.full_name}}</td>
                           <td>{{each_friend.languages_spoken}}</td>
                           <td>{{each_friend.languages_to_learn}}</td>
-                          <td><a href="chatroom" class="button fit">Select</a></td>
+                          <td><a href="/chatroom?id={{each_friend.id}}" class="button fit">Select</a></td>
                         </tr>
 												{% endfor %}
                       </tbody>
