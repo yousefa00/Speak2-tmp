@@ -262,7 +262,7 @@ class User(ndb.Model):
     id = ndb.StringProperty()
     languages_spoken = ndb.StringProperty()#repeated=True
     languages_to_learn = ndb.StringProperty()#repeated=True
-    friends = []#ndb.StringProperty()repeated=True
+    friends = ndb.StringProperty(repeated=True)
     timeSent = ndb.StringProperty()
     language_proficiency = ndb.StringProperty()
 
@@ -611,9 +611,10 @@ class SearchPage(webapp2.RequestHandler):
 
     def post(self):
         user = users.get_current_user()
-        ourUser = User.query(user.user_id() == User.id).fetch()
+        ourUser = User.query(user.user_id() == User.id).fetch()[0]
         friend = self.request.get('AddFriend')
-        ourUser[0].friends.append(friend)
+        ourUser.friends.append(friend)
+        ourUser.put()
         self.redirect('/chats')
 
 
@@ -632,11 +633,21 @@ class IntermediatePage(webapp2.RequestHandler):
 class AjaxGetMessages(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
+        otherUser = self.request.get('id')
         # Part of broken query:
         # ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
         #        ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)))
         data = {
-            'messages': allToDict(Message.query(ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch())
+            'messages': allToDict(
+                Message.query(
+                    ndb.OR(
+                        ndb.AND(
+                            Message.sentFrom == user.user_id(),
+                            Message.sentTo == otherUser),
+                        ndb.AND(
+                            Message.sentTo == user.user_id(),
+                            Message.sentFrom == otherUser)
+                    ),ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch())
         }
         self.response.headers['Content-Type'] = 'application/json'
         print(data)
