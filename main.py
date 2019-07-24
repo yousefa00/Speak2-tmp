@@ -285,8 +285,6 @@ class MainPage(webapp2.RequestHandler):
         'login_url': users.create_login_url('/settings'),
         'logout_url': users.create_logout_url('/'),
         }
-        if user:
-            print "blah blah blah" + str(user.user_id())
         User.query(ancestor=root_parent()).fetch(),
         self.response.write(index_template.render(values))
 
@@ -358,10 +356,10 @@ class UserPage(webapp2.RequestHandler):
 
 class SettingsPage(webapp2.RequestHandler):
     def get(self): #for a get request
+
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
-        listofusers = User.query(User.id == user.user_id()).fetch()
         languages = {
         'aa': 'Afar',
         'ab': 'Abkhazian',
@@ -556,21 +554,17 @@ class SettingsPage(webapp2.RequestHandler):
         'zh': 'Chinese',
         'zu': 'Zulu'
         }
-
-        test = ""
-
+        if user:
+            listofusers = User.query(User.id == user.user_id()).fetch()
+        print len(listofusers)
         if len(listofusers) > 0:
-            values = {
-            'user': user,
-            'logout_url': users.create_logout_url('/'),
-            'printuser' : listofusers[0],
-            'languages' : languages
-            }
+            self.redirect('/users')
+            return
         else:
             values = {
             'user': user,
             'logout_url': users.create_logout_url('/'),
-            'printuser' : test,
+            'printuser' : '',
             'languages' : languages
             }
         self.response.write(index_template.render(values))
@@ -609,15 +603,19 @@ class SearchPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/search.html')
         self.response.write(index_template.render(values))
 
-    def post(self):
+
+class AddFriends(webapp2.RequestHandler):
+    def get(self):
         user = users.get_current_user()
-        ourUser = User.query(user.user_id() == User.id).fetch()[0]
-        friend = self.request.get('AddFriend')
-        ourUser.friends.append(friend)
-        ourUser.put()
+        id = self.request.get('id')
+        my_user = User.query(User.id == user.user_id()).fetch()[0]
+        if id not in my_user.friends:
+            my_user.friends.append(id)
+            my_user.put()
+            other_user = User.query(User.id == id).fetch()[0]
+            other_user.friends.append(user.user_id())
+            other_user.put()
         self.redirect('/chats')
-
-
 
 class IntermediatePage(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -658,5 +656,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage),
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add', AddFriends)
      ], debug=True)
