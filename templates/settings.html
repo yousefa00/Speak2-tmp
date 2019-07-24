@@ -4,8 +4,15 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+
+		<link rel="stylesheet" href="css/bootstrap-3.1.1.min.css" type="text/css" />
+		<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+
 		<link href="https://fonts.googleapis.com/css?family=Ribeye&display=swap" rel="stylesheet">
 		<title>Settings</title>
 		<meta charset="utf-8" />
@@ -38,28 +45,43 @@
 	         <h1 class="major" style= " font-family: 'Ribeye', cursive;">Settings</h1>
 
 							 <form method="post" action="/settings">
-							 	<div class="row gtr-uniform">
-							 		<div class="col-6 col-12-xsmall">
-							 			<input type="text" name="name" id="demo-name" value="" placeholder="Name" />
-							 		</div>
 
-							 		<div class="col-12">
-							 			<select name="spoken" id="demo-category">
-							 				<option>- Languages Proficient -</option>
-							 				<option value="Lang1">Language 1</option>
-							 				<option value="Lang2">Language 2</option>
-							 				<option value="Lang3">Language 3</option>
-							 				<option value="Lang4">Language 4</option>
-							 			</select>
-							 		</div>
-									<div class="col-12">
-							 			<select name="proguy" id="demo-category">
-							 				<option>- Proficiency -</option>
-							 				<option value="Elementary">Elementary</option>
-							 				<option value="Intermediate">Intermediate</option>
-							 				<option value="Fluent">Fluent</option>
-							 			</select>
-							 		</div>
+								<div class="row gtr-uniform">
+								<div class="col-6 col-12-xsmall">
+								<input type="text" name="name" id="demo-name" value="" placeholder="Name" />
+								</div>
+
+								<div class="col-12">
+								<select name="spoken" id="demo-category">
+								<option>- First Proficient Language -</option>
+								<option value="Lang1">Language 1</option>
+								<option value="Lang2">Language 2</option>
+								<option value="Lang3">Language 3</option>
+								<option value="Lang4">Language 4</option>
+								</select>
+								</div>
+
+								<div class="col-12">
+								<select name="spoken" id="demo-category">
+								<option>- Second Proficient Language -</option>
+								<option value="Lang1">Language 1</option>
+								<option value="Lang2">Language 2</option>
+								<option value="Lang3">Language 3</option>
+								<option value="Lang4">Language 4</option>
+								</select>
+								</div>
+
+
+
+
+								<div class="col-12">
+								<select name="proguy" id="demo-category">
+								<option>- Proficiency Level -</option>
+								<option value="Elementary">Elementary</option>
+								<option value="Intermediate">Intermediate</option>
+								<option value="Fluent">Fluent</option>
+								</select>
+								</div>
 
 								<!-- <div name = proguy>
 							 		<div class="col-4 col-12-small">
@@ -88,16 +110,17 @@
 											<option value="Lang4">Language 4</option>
 										</select>
 									</div>
+									<div class="col-12">
+									<ul class="actions">
+									<li><input type="submit" value="Submit" class="primary"/></li>
+									<li><input type="reset" value="Reset" /></li>
 
-							 		<div class="col-12">
-							 			<ul class="actions">
-							 			<li><input type="submit" id='submit' value="Submit" class="primary"/></li>
-										<li><input type="reset" value="Reset" /></li>
+									</ul>
+									</div>
+									</div>
+									</form>
 
-							 			</ul>
-							 		</div>
-							 	</div>
-							 </form>
+
  <h1 class="major" action = "settings" method = "get">Profile</h1>
  <section>
 	 <div class="table-wrapper">
