@@ -19,6 +19,8 @@
 			<a href="index" class="title" style=" font-family: 'Ribeye', cursive;">Speak2</a>
 			<nav>
 				<ul>
+					<li> {% if user %} <input type="text" placeholder="Username or language" id="searchInput" name="search"> {% endif %}</li>
+					<li>{% if user %}<a id='search' class="button scrolly">Search</a>{% endif %}</li>
 					<li><a href="users"> {% if user %} Dashboard {% endif %} </a></li>
 					<li><a href="#one">About Us</a></li>
 					<li><a href="#two">FAQs</a></li>
@@ -172,6 +174,7 @@
 			</footer>
 
 		<!-- Scripts -->
+			<script src="assets/js/search.js"></script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
