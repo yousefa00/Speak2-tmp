@@ -24,7 +24,6 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a href="index" class="title">Speak2</a>
 				<nav>
 					<ul>
 
@@ -46,7 +45,7 @@
 				<!-- Main -->
 	      <section id="main" class="wrapper">
 	         <div class="inner">
-	         <h1 class="major" style= " font-family: 'Ribeye', cursive;">Settings</h1>
+	         <h1 class="major" >Settings</h1>
 
 							 <form method="post" action="/settings">
 
@@ -58,20 +57,26 @@
 								<div class="col-12">
 								<select name="spoken" id="demo-category">
 								<option>- First Proficient Language -</option>
-								<option value="Lang1">Language 1</option>
+								{% for key in languages %}
+										<option value="{{languages[key]}}">{{languages[key]}} </option>
+								{% endfor %}
+								<!-- <option value="Lang1">Language 1</option>
 								<option value="Lang2">Language 2</option>
 								<option value="Lang3">Language 3</option>
-								<option value="Lang4">Language 4</option>
+								<option value="Lang4">Language 4</option> -->
 								</select>
 								</div>
 
 								<div class="col-12">
 								<select name="spoken" id="demo-category">
 								<option>- Second Proficient Language -</option>
-								<option value="Lang1">Language 1</option>
+								{% for key in languages %}
+										<option value="{{languages[key]}}">{{languages[key]}} </option>
+								{% endfor %}
+								<!-- <option value="Lang1">Language 1</option>
 								<option value="Lang2">Language 2</option>
 								<option value="Lang3">Language 3</option>
-								<option value="Lang4">Language 4</option>
+								<option value="Lang4">Language 4</option> -->
 								</select>
 								</div>
 
@@ -101,10 +106,9 @@
 									<div class="col-12">
 										<select name="learn" id="demo-category">
 											<option>- Hoping to Learn -</option>
-											<option value="Lang1">Language 1</option>
-											<option value="Lang2"> Language 2</option>
-											<option value="Lang3">Language 3</option>
-											<option value="Lang4">Language 4</option>
+											{% for key in languages %}
+												<option value="{{languages[key]}}">{{languages[key]}} </option>
+											{% endfor %}
 										</select>
 									</div>
 									<div class="col-12">
@@ -126,7 +130,7 @@
 				 <tr>
 					 <th>Name</th>
 					 <th>Languages Proficient</th>
-					 <th>Level of Proficiency</th>
+					 <!-- <th>Level of Proficiency</th> -->
 					 <th>Hoping to Learn</th>
 				 </tr>
 			 </thead>
@@ -134,7 +138,7 @@
 				 <tr>
 					 <td>{{printuser.full_name}}</td>
 					 <td>{{printuser.languages_spoken}}</td>
-					 <td>{{printuser.language_proficiency}}</td>
+					 <!-- <td>{{printuser.language_proficiency}}</td> -->
 					 <td>{{printuser.languages_to_learn}}</td>
 					 </tr>
 			 </tbody>
