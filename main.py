@@ -62,7 +62,7 @@ class User(ndb.Model):
     id = ndb.StringProperty()
     languages_spoken = ndb.StringProperty()#repeated=True
     languages_to_learn = ndb.StringProperty()#repeated=True
-    friends = []#ndb.StringProperty()repeated=True
+    friends = ndb.StringProperty(repeated=True)
     timeSent = ndb.StringProperty()
     language_proficiency = ndb.StringProperty()
 
@@ -213,14 +213,19 @@ class SearchPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/search.html')
         self.response.write(index_template.render(values))
 
-    def post(self):
+
+class AddFriends(webapp2.RequestHandler):
+    def get(self):
         user = users.get_current_user()
-        ourUser = User.query(user.user_id() == User.id).fetch()
-        friend = self.request.get('AddFriend')
-        ourUser[0].friends.append(friend)
+        id = self.request.get('id')
+        my_user = User.query(User.id == user.user_id()).fetch()[0]
+        if id not in my_user.friends:
+            my_user.friends.append(id)
+            my_user.put()
+            other_user = User.query(User.id == id).fetch()[0]
+            other_user.friends.append(user.user_id())
+            other_user.put()
         self.redirect('/chats')
-
-
 
 class IntermediatePage(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -251,5 +256,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage),
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add', AddFriends)
      ], debug=True)

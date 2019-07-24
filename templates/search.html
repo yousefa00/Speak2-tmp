@@ -50,14 +50,13 @@
 											<tbody>
 
 												{% for each_learner in listofusers %}
-												<form method="post" value ={{each_learner.id}}>
+
 												<tr>
                           <td>{{each_learner.full_name}}</td>
                           <td>{{each_learner.languages_spoken}}</td>
                           <td>{{each_learner.languages_to_learn}}</td>
-													<td><input type="submit" class="button fit" name="AddFriend" value = "Add to Chats"></td>
+													<td><a class="button fit" href="/add?id={{each_learner.id}}">Add to Chats</a></td>
 												</tr>
-												</form>
 												{% endfor %}
 
                       </tbody>
