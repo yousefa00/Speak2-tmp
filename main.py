@@ -205,11 +205,6 @@ class AjaxGetMessages(webapp2.RequestHandler):
         #        ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)))
         # listofusers = User.query(ndb.OR(queryName == User.full_name, queryName == User.languages_spoken)).fetch()
         data = {
-<<<<<<< Updated upstream
-            'messages': allToDict(Message.query(ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
-                ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser))),
-                 ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch())
-=======
             'messages': allToDict(
                 Message.query(
                     ndb.OR(
@@ -220,7 +215,7 @@ class AjaxGetMessages(webapp2.RequestHandler):
                             Message.sentTo == user.user_id(),
                             Message.sentFrom == otherUser)
                     ),ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch())
->>>>>>> Stashed changes
+
         }
         self.response.headers['Content-Type'] = 'application/json'
         print(data)
