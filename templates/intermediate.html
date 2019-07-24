@@ -60,12 +60,14 @@
                         </tr>
                       </thead>
                       <tbody>
+												{% for each_friend in listoffriends %}
                         <tr>
-                          <td>Item One</td>
-                          <td>Ante turpis integer aliquet porttitor.</td>
-                          <td>29.99</td>
+                          <td>{{each_friend.full_name}}</td>
+                          <td>{{each_friend.languages_spoken}}</td>
+                          <td>{{each_friend.languages_to_learn}}</td>
                           <td><a href="chatroom" class="button fit">Select</a></td>
                         </tr>
+												{% endfor %}
                       </tbody>
                     </table>
                   </div>
