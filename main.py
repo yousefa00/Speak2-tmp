@@ -5,10 +5,12 @@ import os
 import json
 import datetime
 import logging
+import urllib
+import ssl
 from google.appengine.api import urlfetch
 from google.appengine.api import users
 from google.appengine.ext import ndb
-
+import api_key
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
@@ -19,6 +21,26 @@ JINJA_ENV = jinja2.Environment(
 
 def root_parent():
     return ndb.Key('Parent', 'default_parent')
+
+def translateSentence():
+    try:
+        form_data = urllib.urlencode({
+            'q': 'The Great Pyramid of Giza (also known as the Pyramid of Khufu or the Pyramid of Cheops) is the oldest and largest of the three pyramids in the Giza pyramid complex.',
+            'source': 'en',
+            'target': 'es',
+            'format': 'text'
+        })
+        headers = {'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Bearer ' + api_key.gcpkey
+        }
+        result = urlfetch.fetch(
+            url='https://translation.googleapis.com/language/translate/v2',
+            payload=form_data,
+            method=urlfetch.POST,
+            headers=headers)
+        return result.content
+    except urlfetch.Error:
+        logging.exception('Caught exception fetching url')
 
 def toDict(msg):
     return {
