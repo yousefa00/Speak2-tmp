@@ -634,13 +634,14 @@ class IntermediatePage(webapp2.RequestHandler):
 class AjaxGetMessages(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
+        myId = user.user_id()
         otherUser = self.request.get('id')
         # Part of broken query:
         # ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
         #        ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)))
         data = {
-            'messages': allToDict(
-                Message.query(ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch())
+            'messages': allToDict(Message.query(ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch()),
+            'myId': myId
         }
         self.response.headers['Content-Type'] = 'application/json'
         print(data)
