@@ -23,7 +23,7 @@ function fetchMessage() {
             let cell2 = row.insertCell()
             cell2.innerHTML = msgs.messages[i].msg
             cell2.style.textAlign = "right"
-          } else {
+          } else if (msgs.messages[i].sentTo == myJson.myId){
             let cell = row.insertCell()
             cell.innerHTML = msgs.messages[i].msg
             let cell2 = row.insertCell()
