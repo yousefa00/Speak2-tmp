@@ -25,5 +25,13 @@ indexes:
 - kind: Message
   ancestor: yes
   properties:
+  - name: sentFrom
+  - name: sentTo
+  - name: timeSent
+  - name: msg
+
+- kind: Message
+  ancestor: yes
+  properties:
   - name: timeSent
   - name: msg

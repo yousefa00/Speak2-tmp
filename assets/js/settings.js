@@ -1,5 +1,5 @@
-function timedRefresh(timeoutPeriod) {
-  setTimeout('location.reload(true)', timeoutPeriod);
-}
+const button = document.querySelector('#submit');
 
-window.onload = timedRefresh(10000);
+button.addEventListener('click', () => {
+  location.reload();
+});
