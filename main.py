@@ -85,8 +85,6 @@ class MainPage(webapp2.RequestHandler):
         'login_url': users.create_login_url('/settings'),
         'logout_url': users.create_logout_url('/'),
         }
-        if user:
-            print "blah blah blah" + str(user.user_id())
         User.query(ancestor=root_parent()).fetch(),
         self.response.write(index_template.render(values))
 
@@ -158,13 +156,16 @@ class UserPage(webapp2.RequestHandler):
 
 class SettingsPage(webapp2.RequestHandler):
     def get(self): #for a get request
+
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
-        listofusers = User.query(User.id == user.user_id()).fetch()
-
-        test = ""
-
+        if user:
+            listofusers = User.query(User.id == user.user_id()).fetch()
+        print len(listofusers)
+        if len(listofusers) > 0:
+            self.redirect('/users')
+            return
         if len(listofusers) > 0:
             values = {
             'user': user,
@@ -175,7 +176,7 @@ class SettingsPage(webapp2.RequestHandler):
             values = {
             'user': user,
             'logout_url': users.create_logout_url('/'),
-            'printuser' : test
+            'printuser' : ''
             }
         self.response.write(index_template.render(values))
 
