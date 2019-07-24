@@ -181,8 +181,10 @@ class SearchPage(webapp2.RequestHandler):
         queryName = self.request.get('val')
         listofusers = User.query(ndb.OR(queryName == User.full_name, queryName == User.languages_spoken)).fetch()
         actuallistofusers = []
+        seriouslylistofusers = []
+        currentuser = User.query(User.id == user.user_id()).fetch()
         for x in listofusers:
-            if x.id != user.user_id():
+            if x.id != user.user_id() and x.languages_to_learn == currentuser[0].languages_spoken:
                 actuallistofusers.append(x)
         values = {
         'listofusers' : actuallistofusers
