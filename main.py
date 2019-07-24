@@ -40,7 +40,7 @@ class User(ndb.Model):
     id = ndb.StringProperty()
     languages_spoken = ndb.StringProperty()#repeated=True
     languages_to_learn = ndb.StringProperty()#repeated=True
-    friends = ndb.StringProperty()#repeated=True
+    friends = []#ndb.StringProperty()repeated=True
     timeSent = ndb.StringProperty()
     language_proficiency = ndb.StringProperty()
 
@@ -190,6 +190,15 @@ class SearchPage(webapp2.RequestHandler):
         }
         index_template = JINJA_ENV.get_template('templates/search.html')
         self.response.write(index_template.render(values))
+
+    def post(self):
+        user = users.get_current_user()
+        ourUser = User.query(user.user_id() == User.id).fetch()
+        friend = self.request.get('AddFriend')
+        ourUser[0].friends.append(friend)
+        self.redirect('/chats')
+
+
 
 class IntermediatePage(webapp2.RequestHandler):
     def get(self): #for a get request
