@@ -176,11 +176,16 @@ class SettingsPage(webapp2.RequestHandler):
 
 class SearchPage(webapp2.RequestHandler):
     def get(self): #for a get request
+        user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         queryName = self.request.get('val')
         listofusers = User.query(ndb.OR(queryName == User.full_name, queryName == User.languages_spoken)).fetch()
+        actuallistofusers = []
+        for x in listofusers:
+            if x.id != user.user_id():
+                actuallistofusers.append(x)
         values = {
-        'listofusers' : listofusers
+        'listofusers' : actuallistofusers
         }
         index_template = JINJA_ENV.get_template('templates/search.html')
         self.response.write(index_template.render(values))
