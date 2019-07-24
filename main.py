@@ -282,7 +282,7 @@ class MainPage(webapp2.RequestHandler):
         index_template = JINJA_ENV.get_template('templates/index.html')
         values ={
         'user': user,
-        'login_url': users.create_login_url('/settings'),
+        'login_url': users.create_login_url('/firstLoginCheck'),
         'logout_url': users.create_logout_url('/'),
         }
         User.query(ancestor=root_parent()).fetch(),
@@ -354,9 +354,18 @@ class UserPage(webapp2.RequestHandler):
 #         self.response.headers['Content-Type'] = 'text/html'
 #         index_template = JINJA_ENV.get_template('templates/login.html')
 
+class FirstLoginCheck(webapp2.RequestHandler):
+    def get(self):
+        if user:
+            listofusers = User.query(User.id == user.user_id()).fetch()
+        if len(listofusers) > 0:
+            self.redirect('/users')
+            return
+        else:
+            self.redirect('/settings')
+
 class SettingsPage(webapp2.RequestHandler):
     def get(self): #for a get request
-
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
@@ -554,19 +563,12 @@ class SettingsPage(webapp2.RequestHandler):
         'zh': 'Chinese',
         'zu': 'Zulu'
         }
-        if user:
-            listofusers = User.query(User.id == user.user_id()).fetch()
-        print len(listofusers)
-        if len(listofusers) > 0:
-            self.redirect('/users')
-            return
-        else:
-            values = {
-            'user': user,
-            'logout_url': users.create_logout_url('/'),
-            'printuser' : '',
-            'languages' : languages
-            }
+        values = {
+        'user': user,
+        'logout_url': users.create_logout_url('/'),
+        'printuser' : '',
+        'languages' : languages
+        }
         self.response.write(index_template.render(values))
 
     def post(self):
@@ -656,5 +658,5 @@ class AjaxGetMessages(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage), ('/generic', GenericPage), ('/index', MainPage), ('/elements', ElementsPage),
      ('/users', UserPage), ('/chatroom', ChatPage), ('/settings', SettingsPage), ('/search', SearchPage),
-     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add', AddFriends)
+     ('/ajax/AjaxGetMessages', AjaxGetMessages),("/chats", IntermediatePage), ('/add', AddFriends), ('/firstLoginCheck', FirstLoginCheck)
      ], debug=True)
