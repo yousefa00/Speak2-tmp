@@ -48,11 +48,37 @@
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major" style= " font-family: 'Roboto', sans-serif;" >Welcome to Speak2, {{user.nickname()}}</h1>
-							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<p>The only unique, welcoming community that fosters relationships between bilinguals in order to strengthen a current known language or learn a new one.  As a group of four bilinguals, our mission is to bridge the language gap and connect like-minded individuals who wish to expand their knowledge of other languages. </p>
+							<span class="image fit"><img src="images/about2.jpg"  width=300 height=400 alt="" /></span>
+							<!-- <p>The only unique, welcoming community that fosters relationships between bilinguals in order to strengthen a current known language or learn a new one.</p> -->
+
+							<h1 class="major" style= " font-family: 'Roboto', sans-serif;" >Your Friends</h1>
+							<div class="table-wrapper">
+								<table>
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Languages Proficient</th>
+											<th>Hoping to Learn</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										{% for each_friend in myfriends %}
+										<tr>
+											<td>{{each_friend.full_name}}</td>
+											<td>{{each_friend.languages_spoken}}</td>
+											<td>{{each_friend.languages_to_learn}}</td>
+										</tr>
+										{% endfor %}
+
+									</tbody>
+								</table>
+							</div>
+
 						</div>
 					</section>
+
 
 			</div>
 

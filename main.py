@@ -154,9 +154,15 @@ class UserPage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/user.html')
+        myself = User.query(User.id == user.user_id()).fetch()[0]
+        myfriends = []
+        if len(myself.friends) >0:
+            for x in myself.friends:
+                myfriends.append(User.query(User.id == x).fetch()[0])
         values ={
         'user': user,
         'logout_url': users.create_logout_url('/'),
+        'myfriends' : myfriends
         }
         self.response.write(index_template.render(values))
 
@@ -362,7 +368,7 @@ class SettingsPage(webapp2.RequestHandler):
         'zh': 'Chinese',
         'zu': 'Zulu'
         }
-        printuser = User.query(User.id == user.user_id()).fetch()
+        printuser = User.query(User.id == user.user_id(),ancestor=root_parent()).fetch()
         if len(printuser) == 0:
             printuser = None
         else:
@@ -399,10 +405,11 @@ class SearchPage(webapp2.RequestHandler):
         queryName = self.request.get('val')
         listofusers = User.query(ndb.OR(queryName == User.full_name, queryName == User.languages_spoken)).fetch()
         actuallistofusers = []
-        currentuser = User.query(User.id == user.user_id()).fetch()
+        currentuser = User.query(User.id == user.user_id()).fetch()[0]
         for x in listofusers:
-            if x.id != user.user_id() and x.languages_to_learn == currentuser[0].languages_spoken:
-                actuallistofusers.append(x)
+            if x.id != user.user_id() and x.languages_to_learn == currentuser.languages_spoken:
+                if x.id not in currentuser.friends:
+                    actuallistofusers.append(x)
         values = {
         'listofusers' : actuallistofusers
         }
