@@ -23,14 +23,27 @@ JINJA_ENV = jinja2.Environment(
 def root_parent():
     return ndb.Key('Parent', 'default_parent')
 
+# def getAPIKey():
+#     form_data = urllib.urlencode({
+#         "delegates": [],
+#         "scope": [
+#         "https://www.googleapis.com/auth/cloud-platform"
+#         ],
+#         "lifetime": "300s"
+#     })
+#     result = urlfetch.fetch(
+#         url='https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/speak2@appspot.gserviceaccount.com:generateAccessToken',
+#         payload=form_data,
+#         method=urlfetch.POST)
+#     print result.content
+
 def translateSentence(textToTranslate, sourceLang, targetLang):
     try:
-        inverted_languages = {
-        {'Estonian': 'et', 'Telugu': 'te', 'Limburgan; Limburger; Limburgish': 'li', 'Uighur; Uyghur': 'ug', 'Pushto; Pashto': 'ps', 'Cornish': 'kw','Bulgarian': 'bg', 'Norwegian': 'no', 'Yoruba': 'yo', 'Bambara': 'bm', 'French': 'fr', 'Fijian': 'fj', 'Bengali': 'bn', 'Tsonga': 'ts', 'Tamil': 'ta', 'Ossetian; Ossetic': 'os', 'Samoan': 'sm', 'Nepali': 'ne', 'Finnish': 'fi', 'Manx': 'gv', 'Sundanese': 'su', 'Albanian': 'sq', 'Ojibwa': 'oj', 'Tagalog': 'tl', 'Serbian': 'sr', 'Malayalam': 'ml', 'Haitian; Haitian Creole': 'ht', 'Aragonese': 'an', 'Italian': 'it', 'Walloon': 'wa', 'Hebrew': 'he', 'Chamorro': 'ch', 'Bislama': 'bi', 'Kongo': 'kg', 'Micmac': 'Mi', 'Galician': 'gl', 'German': 'de', 'Slovak': 'sk', 'Yiddish': 'yi', 'Tonga (Tonga Islands)': 'to', 'Polish': 'pl', 'Xhosa': 'xh', 'Marshallese': 'mh', 'Kuanyama; Kwanyama': 'kj', 'Marathi': 'mr','Slovenian': 'sl', 'Ewe': 'ee', 'Fulah': 'ff', 'Azerbaijani': 'az', 'Faroese': 'fo', 'Nauru': 'na', 'Cree': 'cr', 'Danish': 'da', 'Indonesian': 'id', 'Latin': 'la', 'Zulu': 'zu', 'Georgian': 'ka', 'Tigrinya': 'ti', 'Ganda': 'lg', 'Komi': 'kv', 'Tajik': 'tg', 'Thai': 'th', 'Afrikaans': 'af', 'Tibetan': 'bo', 'Turkmen': 'tk', 'Ndebele, North; North Ndebele': 'nd', 'Central Khmer': 'km', 'Avaric': 'av', 'Guarani': 'gn', 'Uzbek': 'uz', 'Divehi': 'dv', 'Punjabi': 'pa', 'Herero': 'hz', 'Gaelic': 'gd', 'Burmese': 'my', 'Maori': 'mi', 'Latvian': 'lv', 'English': 'en', 'Interlingue; Occidental': 'ie', 'Lingala': 'ln', 'Chinese': 'zh', 'Greek': 'el', 'Inuktitut': 'iu', 'Tatar': 'tt', 'Pali': 'pi', 'Bosnian': 'bs', 'Arabic': 'ar', 'Venda': 've', 'Breton': 'br', 'Kikuyu; Gikuyu': 'ki', 'Swahili': 'sw', 'Swedish': 'sv', 'Interlingua (International Auxiliary Language Association)': 'ia', 'Icelandic': 'is', 'Turkish': 'tr', 'Kalaallisut; Greenlandic': 'kl', 'Twi': 'tw', 'Inupiaq': 'ik', 'Malay': 'ms', 'Luxembourgish; Letzeburgesch': 'lb', 'Gujarati': 'gu', 'Hindi': 'hi', 'Ndebele, South; South Ndebele': 'nr', 'Sindhi': 'sd', 'Korean': 'ko', 'Malagasy': 'mg', 'Chuvash': 'cv', 'Zhuang; Chuang': 'za', 'Occitan (post 1500)': 'oc', 'Hungarian': 'hu', 'Wolof': 'wo', 'Igbo': 'ig', 'Lithuanian': 'lt', 'Kirghiz; Kyrgyz': 'ky', 'Sinhala; Sinhalese': 'si', 'Russian': 'ru', 'Croatian': 'hr', 'Kazakh': 'kk', 'Armenian': 'hy', 'Kashmiri': 'ks', 'Hiri Motu': 'ho', 'Amharic': 'am', 'Romansh': 'rm', 'Javanese': 'jv', 'Oriya': 'or', 'Afar': 'aa', 'Hausa': 'ha', 'Irish': 'ga', 'Navajo; Navaho': 'nv', 'Czech': 'cs', 'Belarusian': 'be', 'Kannada': 'kn', 'Macedonian': 'mk', 'Persian': 'fa', 'Mongolian': 'mn', 'Dzongkha': 'dz', 'Basque': 'eu', 'Aymara': 'ay', 'Romanian; Moldavian; Moldovan': 'ro', 'Dutch; Flemish': 'nl', 'Northern Sami': 'se', 'Vietnamese': 'vi', 'Shona': 'sn', 'Sardinian': 'sc', 'Western Frisian': 'fy', 'Corsican': 'co', 'Swati': 'ss', 'Chechen': 'ce', 'Somali': 'so', 'Sanskrit': 'sa', 'Akan': 'ak', 'Lao': 'lo', 'Ukrainian': 'uk', 'Welsh': 'cy', 'Tahitian': 'ty', 'Maltese': 'mt', 'Sichuan Yi; Nuosu': 'ii', 'Assamese': 'as', 'Kurdish': 'ku', 'Urdu': 'ur', 'Kanuri': 'kr', 'Bashkir': 'ba', 'Luba-Katanga': 'lu', 'Spanish': 'es', 'Tswana': 'tn', 'Ido': 'io', 'Sango': 'sg', 'Oromo': 'om', 'Rundi': 'rn', 'Portuguese': 'pt', 'Abkhazian': 'ab', 'Ndonga': 'ng', 'Japanese': 'ja', 'Kinyarwanda': 'rw', 'Avestan': 'ae', 'Sotho': 'st', 'Quechua': 'qu', 'Esperanto': 'eo'}
-        }
+
+        inverted_languages = {'Estonian': 'et', 'Telugu': 'te', 'Limburgan; Limburger; Limburgish': 'li', 'Uighur; Uyghur': 'ug', 'Pushto; Pashto': 'ps', 'Cornish': 'kw','Bulgarian': 'bg', 'Norwegian': 'no', 'Yoruba': 'yo', 'Bambara': 'bm', 'French': 'fr', 'Fijian': 'fj', 'Bengali': 'bn', 'Tsonga': 'ts', 'Tamil': 'ta', 'Ossetian; Ossetic': 'os', 'Samoan': 'sm', 'Nepali': 'ne', 'Finnish': 'fi', 'Manx': 'gv', 'Sundanese': 'su', 'Albanian': 'sq', 'Ojibwa': 'oj', 'Tagalog': 'tl', 'Serbian': 'sr', 'Malayalam': 'ml', 'Haitian; Haitian Creole': 'ht', 'Aragonese': 'an', 'Italian': 'it', 'Walloon': 'wa', 'Hebrew': 'he', 'Chamorro': 'ch', 'Bislama': 'bi', 'Kongo': 'kg', 'Micmac': 'Mi', 'Galician': 'gl', 'German': 'de', 'Slovak': 'sk', 'Yiddish': 'yi', 'Tonga (Tonga Islands)': 'to', 'Polish': 'pl', 'Xhosa': 'xh', 'Marshallese': 'mh', 'Kuanyama; Kwanyama': 'kj', 'Marathi': 'mr','Slovenian': 'sl', 'Ewe': 'ee', 'Fulah': 'ff', 'Azerbaijani': 'az', 'Faroese': 'fo', 'Nauru': 'na', 'Cree': 'cr', 'Danish': 'da', 'Indonesian': 'id', 'Latin': 'la', 'Zulu': 'zu', 'Georgian': 'ka', 'Tigrinya': 'ti', 'Ganda': 'lg', 'Komi': 'kv', 'Tajik': 'tg', 'Thai': 'th', 'Afrikaans': 'af', 'Tibetan': 'bo', 'Turkmen': 'tk', 'Ndebele, North; North Ndebele': 'nd', 'Central Khmer': 'km', 'Avaric': 'av', 'Guarani': 'gn', 'Uzbek': 'uz', 'Divehi': 'dv', 'Punjabi': 'pa', 'Herero': 'hz', 'Gaelic': 'gd', 'Burmese': 'my', 'Maori': 'mi', 'Latvian': 'lv', 'English': 'en', 'Interlingue; Occidental': 'ie', 'Lingala': 'ln', 'Chinese': 'zh', 'Greek': 'el', 'Inuktitut': 'iu', 'Tatar': 'tt', 'Pali': 'pi', 'Bosnian': 'bs', 'Arabic': 'ar', 'Venda': 've', 'Breton': 'br', 'Kikuyu; Gikuyu': 'ki', 'Swahili': 'sw', 'Swedish': 'sv', 'Interlingua (International Auxiliary Language Association)': 'ia', 'Icelandic': 'is', 'Turkish': 'tr', 'Kalaallisut; Greenlandic': 'kl', 'Twi': 'tw', 'Inupiaq': 'ik', 'Malay': 'ms', 'Luxembourgish; Letzeburgesch': 'lb', 'Gujarati': 'gu', 'Hindi': 'hi', 'Ndebele, South; South Ndebele': 'nr', 'Sindhi': 'sd', 'Korean': 'ko', 'Malagasy': 'mg', 'Chuvash': 'cv', 'Zhuang; Chuang': 'za', 'Occitan (post 1500)': 'oc', 'Hungarian': 'hu', 'Wolof': 'wo', 'Igbo': 'ig', 'Lithuanian': 'lt', 'Kirghiz; Kyrgyz': 'ky', 'Sinhala; Sinhalese': 'si', 'Russian': 'ru', 'Croatian': 'hr', 'Kazakh': 'kk', 'Armenian': 'hy', 'Kashmiri': 'ks', 'Hiri Motu': 'ho', 'Amharic': 'am', 'Romansh': 'rm', 'Javanese': 'jv', 'Oriya': 'or', 'Afar': 'aa', 'Hausa': 'ha', 'Irish': 'ga', 'Navajo; Navaho': 'nv', 'Czech': 'cs', 'Belarusian': 'be', 'Kannada': 'kn', 'Macedonian': 'mk', 'Persian': 'fa', 'Mongolian': 'mn', 'Dzongkha': 'dz', 'Basque': 'eu', 'Aymara': 'ay', 'Romanian; Moldavian; Moldovan': 'ro', 'Dutch; Flemish': 'nl', 'Northern Sami': 'se', 'Vietnamese': 'vi', 'Shona': 'sn', 'Sardinian': 'sc', 'Western Frisian': 'fy', 'Corsican': 'co', 'Swati': 'ss', 'Chechen': 'ce', 'Somali': 'so', 'Sanskrit': 'sa', 'Akan': 'ak', 'Lao': 'lo', 'Ukrainian': 'uk', 'Welsh': 'cy', 'Tahitian': 'ty', 'Maltese': 'mt', 'Sichuan Yi; Nuosu': 'ii', 'Assamese': 'as', 'Kurdish': 'ku', 'Urdu': 'ur', 'Kanuri': 'kr', 'Bashkir': 'ba', 'Luba-Katanga': 'lu', 'Spanish': 'es', 'Tswana': 'tn', 'Ido': 'io', 'Sango': 'sg', 'Oromo': 'om', 'Rundi': 'rn', 'Portuguese': 'pt', 'Abkhazian': 'ab', 'Ndonga': 'ng', 'Japanese': 'ja', 'Kinyarwanda': 'rw', 'Avestan': 'ae', 'Sotho': 'st', 'Quechua': 'qu', 'Esperanto': 'eo'}
 
         form_data = urllib.urlencode({
-            'q': textToTranslate,
+            'q': textToTranslate.encode('utf-8'),
             'source': inverted_languages[sourceLang],
             'target': inverted_languages[targetLang],
             'format': 'text'
@@ -128,7 +141,7 @@ class ChatPage(webapp2.RequestHandler):
             new_msg.sentFrom = user.user_id()
             new_msg.sentTo = str(self.request.get("id"))
             new_msg.msg = self.request.get("chatText")
-            new_msg.translated = translate(self.request.get("chatText"), my_user.languages_spoken, other_user.languages_spoken)
+            new_msg.translated = json.loads(translateSentence(self.request.get("chatText"), my_user.languages_spoken, other_user.languages_spoken))["data"]["translations"][0]["translatedText"]
             new_msg.timeSent = str(datetime.datetime.now())
             new_msg.put()
             # redirect to '/' so that the get() version of this handler will run
@@ -433,11 +446,9 @@ class AjaxGetMessages(webapp2.RequestHandler):
         user = users.get_current_user()
         myId = user.user_id()
         otherUser = self.request.get('id')
-        # Part of broken query:
-        # ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
-        #        ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)))
         data = {
-            'messages': allToDict(Message.query(ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch()),
+            'messages': allToDict(Message.query(ndb.OR(ndb.AND(Message.sentFrom == user.user_id(), Message.sentTo == otherUser),
+                   ndb.AND(Message.sentTo == user.user_id(), Message.sentFrom == otherUser)), ancestor=root_parent()).order(Message.timeSent, Message.msg).fetch()),
             'myId': myId
         }
         self.response.headers['Content-Type'] = 'application/json'
