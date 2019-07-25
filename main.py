@@ -349,7 +349,7 @@ class SettingsPage(webapp2.RequestHandler):
         'zh': 'Chinese',
         'zu': 'Zulu'
         }
-        printuser = User.query(User.id == user.user_id()).fetch()
+        printuser = User.query(User.id == user.user_id(),ancestor=root_parent()).fetch()
         if len(printuser) == 0:
             printuser = None
         else:
