@@ -11,6 +11,7 @@ from google.appengine.api import urlfetch
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import api_key
+from collections import OrderedDict
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
@@ -286,6 +287,7 @@ class MainPage(webapp2.RequestHandler):
         User.query(ancestor=root_parent()).fetch(),
         self.response.write(index_template.render(values))
 
+
 class GenericPage(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
@@ -350,7 +352,8 @@ class SettingsPage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/settings.html')
-        languages = {
+        # languageactual = OrderedDict()
+        languages= {
         'aa': 'Afar',
         'ab': 'Abkhazian',
         'af': 'Afrikaans',
@@ -385,16 +388,13 @@ class SettingsPage(webapp2.RequestHandler):
         'cu': 'Slavic',
         'cv': 'Chuvash',
         'kw': 'Cornish',
-        'co': 'Corsican',
         'cr': 'Cree',
         'cy': 'Welsh',
-        'cs': 'Czech',
         'da': 'Danish',
         'de': 'German',
         'dz': 'Dzongkha',
         'eo': 'Esperanto',
         'et': 'Estonian',
-        'eu': 'Basque',
         'ee': 'Ewe',
         'en': 'English',
         'fo': 'Faroese',
@@ -402,15 +402,12 @@ class SettingsPage(webapp2.RequestHandler):
         'fj': 'Fijian',
         'fi':'Finnish',
         'fr': 'French',
-        'fr': 'French',
-        'fy': 'Western Frisian',
         'ff': 'Fulah',
         'Ga': 'Georgian',
         'de': 'German',
         'gd': 'Gaelic',
         'ga': 'Irish',
         'gl': 'Galician',
-        'gv': 'Manx',
         'gn': 'Guarani',
         'gu': 'Gujarati',
         'ht': 'Haitian',
@@ -421,13 +418,11 @@ class SettingsPage(webapp2.RequestHandler):
         'ho': 'Hiri Motu',
         'hr': 'Croatian',
         'hu': 'Hungarian',
-        'hy': 'Armenian',
         'ig': 'Igbo',
         'is': 'Icelandic',
         'io': 'Ido',
         'ii': 'Sichuan Yi',
         'iu': 'Inuktitut',
-        'ie': 'Interlingue; Occidental',
         'id': 'Indonesian',
         'ik': 'Inupiaq',
         'is': 'Icelandic',
@@ -437,7 +432,6 @@ class SettingsPage(webapp2.RequestHandler):
         'kl': 'Kalaallisut',
         'kn': 'Kannada',
         'ks': 'Kashmiri',
-        'ka': 'Georgian',
         'kr': 'Kanuri',
         'kk': 'Kazakh',
         'km': 'Central Khmer',
@@ -455,7 +449,7 @@ class SettingsPage(webapp2.RequestHandler):
         'li': 'Limburgan',
         'ln': 'Lingala',
         'lt': 'Lithuanian',
-        'lb': 'Luxembourgish; Letzeburgesch',
+        'lb': 'Luxembourgish',
         'lu': 'Luba-Katanga',
         'lg': 'Ganda',
         'mk': 'Macedonian',
@@ -473,7 +467,7 @@ class SettingsPage(webapp2.RequestHandler):
         'ms': 'Malay',
         'my': 'Burmese',
         'na': 'Nauru',
-        'nv': 'Navajo; Navaho',
+        'nv': 'Navajo',
         'nr': 'Ndebele',
         'ng': 'Ndonga',
         'ne': 'Nepali',
