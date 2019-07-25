@@ -582,7 +582,8 @@ class SearchPage(webapp2.RequestHandler):
         currentuser = User.query(User.id == user.user_id()).fetch()
         for x in listofusers:
             if x.id != user.user_id() and x.languages_to_learn == currentuser[0].languages_spoken:
-                actuallistofusers.append(x)
+                if x.id not in currentuser[0].friends:
+                    actuallistofusers.append(x)
         values = {
         'listofusers' : actuallistofusers
         }
