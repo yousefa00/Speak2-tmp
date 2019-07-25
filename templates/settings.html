@@ -26,7 +26,6 @@
 			<header id="header">
 				<nav>
 					<ul>
-
 						<li><input type="text" placeholder="Username or language" id="searchInput" name="search"></li>
 						<li><a id='search' class="button scrolly">Search</a></li>
 
@@ -56,29 +55,528 @@
 
 								<div class="col-12">
 								<select name="spoken" id="demo-category">
-								<option>- First Proficient Language -</option>
-								{% for key in languages %}
-										<option value="{{languages[key]}}">{{languages[key]}} </option>
-								{% endfor %}
-								<!-- <option value="Lang1">Language 1</option>
-								<option value="Lang2">Language 2</option>
-								<option value="Lang3">Language 3</option>
-								<option value="Lang4">Language 4</option> -->
+								<option>- Proficient Language -</option>
+								<!-- {% for key in languages %}
+								<option value="{{languages[key]}}">{{languages[key]}} </option>
+								{% endfor %} -->
+								<option value="Lang1">Afar
+								</option>
+								<option value="Lang2"> Abkhazian
+								</option>
+								<option value="Lang3">Afrikaans
+								</option>
+								<option value="Lang4">
+								Akan
+								</option>
+								<option value="Lang5">
+								Albanian
+								</option>
+								<option value="Lang6">
+								Amharic
+								</option>
+								<option value="Lang7">
+								Arabic
+								</option>
+								<option value="Lang8">
+								Aragonese
+								</option>
+								<option value="Lang9">
+								Armenian
+								</option>
+								<option value="Lang10">
+								Assamese
+								</option>
+								<option value="Lang11">
+								Avaric
+								</option>
+								<option value="Lang12">
+								Avestan
+								</option>
+								<option value="Lang13">
+								Aymara
+								</option>
+								<option value="Lang14">
+								Azerbaijani
+								</option>
+								<option value="Lang15">
+								Bashkir
+								</option>
+								<option value="Lang16">
+								Bambara
+								</option>
+								<option value="Lang17">
+								Basque
+								</option>
+								<option value="Lang18">
+								Belarusian
+								</option>
+								<option value="Lang19">
+								Bengali
+								</option>
+								<option value="Lang20">
+								Bihari
+								</option>
+								<option value="Lang21">
+								Bislama
+								</option>
+								<option value="Lang23">
+								Bosnian
+								</option>
+								<option value="Lang24">
+								Breton
+								</option>
+								<option value="Lang25">
+								Bulgarian
+								</option>
+								<option value="Lang26">
+								Burmese
+								</option>
+								<option value="Lang27">
+								Catalan
+								</option>
+								<option value="Lang28">
+								Czech
+								</option>
+								<option value="Lang29">
+								Chamorro
+								</option>
+								<option value="Lang30">
+								Chechen
+								</option>
+								<option value="Lang31">
+								Chinese
+								</option>
+								<option value="Lang32">
+								Slavic
+								</option>
+								<option value="Lang33">
+								Chuvash
+								</option>
+								<option value="Lang34">
+								Cornish
+								</option>
+								<option value="Lang35">
+								Cree
+								</option>
+								<option value="Lang36">
+								Croatian
+								</option>
+								<option value="Lang37">
+								Welsh
+								</option>
+								<option value="Lang38">
+								Danish
+								</option>
+								<option value="Lang39">
+								German
+								</option>
+								<option value="Lang40">
+								Dzongkha
+								</option>
+								<option value="Lang41">
+								Esperanto
+								</option>
+								<option value="Lang42">
+								Estonian
+								</option>
+								<option value="Lang43">
+								Ewe
+								</option>
+								<option value="Lang44">
+								English
+								</option>
+								<option value="Lang45">
+								Faroese
+								</option>
+								<option value="Lang46">
+								Persian
+								</option>
+								<option value="Lang47">
+								Fijian
+								</option>
+								<option value="Lang48">
+								Finnish
+								</option>
+								<option value="Lang49">
+								French
+								</option>
+								<option value="Lang4">
+								Fulah
+								</option>
+								<option value="Lang50">
+								Georgian
+								</option>
+								<option value="Lang51">
+								German
+								</option>
+								<option value="Lang52">
+								Gaelic
+								</option>
+								<option value="Lang53">
+								Irish
+								</option>
+								<option value="Lang54">
+								Galician
+								</option>
+								<option value="Lang55">
+								Guarani
+								</option>
+								<option value="Lang56">
+								Gujarati
+								</option>
+								<option value="Lang57">
+								Haitian
+								</option>
+								<option value="Lang58">
+								Hausa
+								</option>
+								<option value="Lang59">
+								Hebrew
+								</option>
+								<option value="Lang60">
+								Herero
+								</option>
+								<option value="Lang61">
+								Hindi
+								</option>
+								<option value="Lang62">
+								Hiri Motu
+								</option>
+								<option value="Lang63">
+								Hungarian
+								</option>
+								<option value="Lang64">
+								Igbo
+								</option>
+								<option value="Lang65">
+								Icelandic
+								</option>
+								<option value="Lang66">
+								Ido
+								</option>
+								<option value="Lang67">
+								Sichuan Yi
+								</option>
+								<option value="Lang68">
+								Inuktitut
+								</option>
+								<option value="Lang69">
+								Indonesian
+								</option>
+								<option value="Lang70">
+								Inupiaq
+								</option>
+								<option value="Lang71">
+								Icelandic
+								</option>
+								<option value="Lang72">
+								Italian
+								</option>
+								<option value="Lang73">
+								Javanese
+								</option>
+								<option value="Lang74">
+								Japanese
+								</option>
+								<option value="Lang75">
+								Kalaallisut
+								</option>
+								<option value="Lang76">
+								Kannada
+								</option>
+								<option value="Lang77">
+								Kashmiri
+								</option>
+								<option value="Lang78">
+								Kanuri
+								</option>
+								<option value="Lang79">
+									Kazakh
+								</option>
+								<option value="Lang80">
+									Central Khmer
+								</option>
+								<option value="Lang81">
+									Kikuyu
+								</option>
+								<option value="Lang82">
+								Kinyarwanda
+								</option>
+								<option value="Lang83">
+								Kirghiz
+								</option>
+								<option value="Lang84">
+									Komi
+								</option>
+								<option value="Lang85">
+									Kongo
+								</option>
+								<option value="Lang86">
+									Korean
+								</option>
+								<option value="Lang87">
+									Kuanyama
+								</option>
+								<option value="Lang88">
+									Kurdish
+								</option>
+								<option value="Lang89">
+									Lao
+								</option>
+								<option value="Lang90">
+									Latin
+								</option>
+								<option value="Lang91">
+									Latvian
+								</option>
+								<option value="Lang92">
+									Limburgan
+								</option>
+								<option value="Lang93">
+									Lingala
+								</option>
+								<option value="Lang94">
+									Lithuanian
+								</option>
+								<option value="Lang95">
+									Luxembourgish
+								</option>
+								<option value="Lang96">
+									Macedonian
+								</option>
+								<option value="Lang97">
+									Malayalam
+								</option>
+								<option value="Lang98">
+									Maori
+								</option>
+								<option value="Lang99">
+									Marathi
+								</option>
+								<option value="Lang100">
+									Malay
+								</option>
+								<option value="Lang101">
+									Micmac
+								</option>
+								<option value="Lang102">
+									Macedonian
+								</option>
+								<option value="Lang103">
+									Malagasy
+								</option>
+								<option value="Lang104">
+									Maltese
+								</option>
+								<option value="Lang105">
+									Mongolian
+								</option>
+								<option value="Lang106">
+									Malay
+								</option>
+								<option value="Lang107">
+									Nauru
+								</option>
+								<option value="Lang108">
+									Navajo
+								</option>
+								<option value="Lang109">
+									Ndebele
+								</option>
+								<option value="Lang110">
+									Ndonga
+								</option>
+								<option value="Lang111">
+									Nepali
+								</option>
+								<option value="Lang112">
+									Norwegian
+								</option>
+								<option value="Lang113">
+									Ojibwa
+								</option>
+								<option value="Lang114">
+								Oriya
+								</option>
+								<option value="Lang115">
+									Oromo
+								</option>
+								<option value="Lang116">
+									Ossetian
+								</option>
+								<option value="Lang117">
+								Punjabi
+								</option>
+								<option value="Lang118">
+									Persian
+								</option>
+								<option value="Lang119">
+									Pali
+								</option>
+								<option value="Lang120">
+									Polish
+								</option>
+								<option value="Lang121">
+									Portuguese
+								</option>
+								<option value="Lang122">
+									Pushto
+								</option>
+								<option value="Lang123">
+									Romansh
+								</option>
+								<option value="Lang124">
+									Romanian
+								</option>
+								<option value="Lang125">
+									Rundi
+								</option>
+								<option value="Lang126">
+								Russian
+								</option>
+								<option value="Lang127">
+									Sango
+								</option>
+								<option value="Lang128">
+									Sanskrit
+								</option>
+								<option value="Lang129">
+									Sinhala
+								</option>
+								<option value="Lang130">
+									Slovak
+								</option>
+								<option value="Lang131">
+									Slovenian
+								</option>
+								<option value="Lang132">
+									Samoan
+								</option>
+								<option value="Lang133">
+									Shona
+								</option>
+								<option value="Lang134">
+									Sindhi
+								</option>
+								<option value="Lang135">
+									Somali
+								</option>
+								<option value="Lang136">
+									Sotho
+								</option>
+								<option value="Lang137">
+									Spanish
+								</option>
+								<option value="Lang138">
+									Sardinian
+								</option>
+								<option value="Lang139">
+									Serbian
+								</option>
+								<option value="Lang140">
+									Swati
+								</option>
+								<option value="Lang141">
+									Sundanese
+								</option>
+								<option value="Lang142">
+									Swahili
+								</option>
+								<option value="Lang143">
+								Swedish
+								</option>
+								<option value="Lang144">
+									Tahitian
+								</option>
+								<option value="Lang145">
+									Tamil
+								</option>
+								<option value="Lang146">
+									Tatar
+								</option>
+								<option value="Lang147">
+									Telugu
+								</option>
+								<option value="Lang148">
+									Tajik
+								</option>
+								<option value="Lang149">
+									Tagalog
+								</option>
+								<option value="Lang150">
+									Thai
+								</option>
+								<option value="Lang151">
+								Tibetan
+								</option>
+								<option value="Lang152">
+									Tigrinya
+								</option>
+								<option value="Lang153">
+									Tonga
+								</option>
+								<option value="Lang154">
+									Tswana
+								</option>
+								<option value="Lang155">
+									Tsonga
+								</option>
+								<option value="Lang156">
+									Turkish
+								</option>
+								<option value="Lang157">
+									Twi
+								</option>
+								<option value="Lang158">
+									Ukrainian
+								</option>
+								<option value="Lang159">
+									Urdu
+								</option>
+								<option value="Lang160">
+									Venda
+								</option>
+								<option value="Lang161">
+									Vietnamese
+								</option>
+								<option value="Lang162">
+									Welsh
+								</option>
+								<option value="Lang163">
+									Walloon
+								</option>
+								<option value="Lang164">
+									Wolof
+								</option>
+								<option value="Lang165">
+									Xhosa
+								</option>
+								<option value="Lang166">
+									Yiddish
+								</option>
+								<option value="Lang167">
+									Yoruba
+								</option>
+								<option value="Lang168">
+									Zulu
+								</option>
+
 								</select>
+
 								</div>
 
-								<div class="col-12">
+								<!-- <div class="col-12">
 								<select name="spoken" id="demo-category">
 								<option>- Second Proficient Language -</option>
 								{% for key in languages %}
 										<option value="{{languages[key]}}">{{languages[key]}} </option>
-								{% endfor %}
+								{% endfor %} -->
 								<!-- <option value="Lang1">Language 1</option>
 								<option value="Lang2">Language 2</option>
 								<option value="Lang3">Language 3</option>
 								<option value="Lang4">Language 4</option> -->
-								</select>
-								</div>
+								<!-- </select>
+								</div> -->
 
 
 
@@ -106,9 +604,510 @@
 									<div class="col-12">
 										<select name="learn" id="demo-category">
 											<option>- Hoping to Learn -</option>
-											{% for key in languages %}
+											<!-- {% for key in languages %}
 												<option value="{{languages[key]}}">{{languages[key]}} </option>
-											{% endfor %}
+											{% endfor %} -->
+											<option value="Lang1">Afar
+											</option>
+											<option value="Lang2"> Abkhazian
+											</option>
+											<option value="Lang3">Afrikaans
+											</option>
+											<option value="Lang4">
+											Akan
+											</option>
+											<option value="Lang5">
+											Albanian
+											</option>
+											<option value="Lang6">
+											Amharic
+											</option>
+											<option value="Lang7">
+											Arabic
+											</option>
+											<option value="Lang8">
+											Aragonese
+											</option>
+											<option value="Lang9">
+											Armenian
+											</option>
+											<option value="Lang10">
+											Assamese
+											</option>
+											<option value="Lang11">
+											Avaric
+											</option>
+											<option value="Lang12">
+											Avestan
+											</option>
+											<option value="Lang13">
+											Aymara
+											</option>
+											<option value="Lang14">
+											Azerbaijani
+											</option>
+											<option value="Lang15">
+											Bashkir
+											</option>
+											<option value="Lang16">
+											Bambara
+											</option>
+											<option value="Lang17">
+											Basque
+											</option>
+											<option value="Lang18">
+											Belarusian
+											</option>
+											<option value="Lang19">
+											Bengali
+											</option>
+											<option value="Lang20">
+											Bihari
+											</option>
+											<option value="Lang21">
+											Bislama
+											</option>
+											<option value="Lang23">
+											Bosnian
+											</option>
+											<option value="Lang24">
+											Breton
+											</option>
+											<option value="Lang25">
+											Bulgarian
+											</option>
+											<option value="Lang26">
+											Burmese
+											</option>
+											<option value="Lang27">
+											Catalan
+											</option>
+											<option value="Lang28">
+											Czech
+											</option>
+											<option value="Lang29">
+											Chamorro
+											</option>
+											<option value="Lang30">
+											Chechen
+											</option>
+											<option value="Lang31">
+											Chinese
+											</option>
+											<option value="Lang32">
+											Slavic
+											</option>
+											<option value="Lang33">
+											Chuvash
+											</option>
+											<option value="Lang34">
+											Cornish
+											</option>
+											<option value="Lang35">
+											Cree
+											</option>
+											<option value="Lang36">
+											Croatian
+											</option>
+											<option value="Lang37">
+											Welsh
+											</option>
+											<option value="Lang38">
+											Danish
+											</option>
+											<option value="Lang39">
+											German
+											</option>
+											<option value="Lang40">
+											Dzongkha
+											</option>
+											<option value="Lang41">
+											Esperanto
+											</option>
+											<option value="Lang42">
+											Estonian
+											</option>
+											<option value="Lang43">
+											Ewe
+											</option>
+											<option value="Lang44">
+											English
+											</option>
+											<option value="Lang45">
+											Faroese
+											</option>
+											<option value="Lang46">
+											Persian
+											</option>
+											<option value="Lang47">
+											Fijian
+											</option>
+											<option value="Lang48">
+											Finnish
+											</option>
+											<option value="Lang49">
+											French
+											</option>
+											<option value="Lang4">
+											Fulah
+											</option>
+											<option value="Lang50">
+											Georgian
+											</option>
+											<option value="Lang51">
+											German
+											</option>
+											<option value="Lang52">
+											Gaelic
+											</option>
+											<option value="Lang53">
+											Irish
+											</option>
+											<option value="Lang54">
+											Galician
+											</option>
+											<option value="Lang55">
+											Guarani
+											</option>
+											<option value="Lang56">
+											Gujarati
+											</option>
+											<option value="Lang57">
+											Haitian
+											</option>
+											<option value="Lang58">
+											Hausa
+											</option>
+											<option value="Lang59">
+											Hebrew
+											</option>
+											<option value="Lang60">
+											Herero
+											</option>
+											<option value="Lang61">
+											Hindi
+											</option>
+											<option value="Lang62">
+											Hiri Motu
+											</option>
+											<option value="Lang63">
+											Hungarian
+											</option>
+											<option value="Lang64">
+											Igbo
+											</option>
+											<option value="Lang65">
+											Icelandic
+											</option>
+											<option value="Lang66">
+											Ido
+											</option>
+											<option value="Lang67">
+											Sichuan Yi
+											</option>
+											<option value="Lang68">
+											Inuktitut
+											</option>
+											<option value="Lang69">
+											Indonesian
+											</option>
+											<option value="Lang70">
+											Inupiaq
+											</option>
+											<option value="Lang71">
+											Icelandic
+											</option>
+											<option value="Lang72">
+											Italian
+											</option>
+											<option value="Lang73">
+											Javanese
+											</option>
+											<option value="Lang74">
+											Japanese
+											</option>
+											<option value="Lang75">
+											Kalaallisut
+											</option>
+											<option value="Lang76">
+											Kannada
+											</option>
+											<option value="Lang77">
+											Kashmiri
+											</option>
+											<option value="Lang78">
+											Kanuri
+											</option>
+											<option value="Lang79">
+												Kazakh
+											</option>
+											<option value="Lang80">
+												Central Khmer
+											</option>
+											<option value="Lang81">
+												Kikuyu
+											</option>
+											<option value="Lang82">
+											Kinyarwanda
+											</option>
+											<option value="Lang83">
+											Kirghiz
+											</option>
+											<option value="Lang84">
+												Komi
+											</option>
+											<option value="Lang85">
+												Kongo
+											</option>
+											<option value="Lang86">
+												Korean
+											</option>
+											<option value="Lang87">
+												Kuanyama
+											</option>
+											<option value="Lang88">
+												Kurdish
+											</option>
+											<option value="Lang89">
+												Lao
+											</option>
+											<option value="Lang90">
+												Latin
+											</option>
+											<option value="Lang91">
+												Latvian
+											</option>
+											<option value="Lang92">
+												Limburgan
+											</option>
+											<option value="Lang93">
+												Lingala
+											</option>
+											<option value="Lang94">
+												Lithuanian
+											</option>
+											<option value="Lang95">
+												Luxembourgish
+											</option>
+											<option value="Lang96">
+												Macedonian
+											</option>
+											<option value="Lang97">
+												Malayalam
+											</option>
+											<option value="Lang98">
+												Maori
+											</option>
+											<option value="Lang99">
+												Marathi
+											</option>
+											<option value="Lang100">
+												Malay
+											</option>
+											<option value="Lang101">
+												Micmac
+											</option>
+											<option value="Lang102">
+												Macedonian
+											</option>
+											<option value="Lang103">
+												Malagasy
+											</option>
+											<option value="Lang104">
+												Maltese
+											</option>
+											<option value="Lang105">
+												Mongolian
+											</option>
+											<option value="Lang106">
+												Malay
+											</option>
+											<option value="Lang107">
+												Nauru
+											</option>
+											<option value="Lang108">
+												Navajo
+											</option>
+											<option value="Lang109">
+												Ndebele
+											</option>
+											<option value="Lang110">
+												Ndonga
+											</option>
+											<option value="Lang111">
+												Nepali
+											</option>
+											<option value="Lang112">
+												Norwegian
+											</option>
+											<option value="Lang113">
+												Ojibwa
+											</option>
+											<option value="Lang114">
+											Oriya
+											</option>
+											<option value="Lang115">
+												Oromo
+											</option>
+											<option value="Lang116">
+												Ossetian
+											</option>
+											<option value="Lang117">
+											Punjabi
+											</option>
+											<option value="Lang118">
+												Persian
+											</option>
+											<option value="Lang119">
+												Pali
+											</option>
+											<option value="Lang120">
+												Polish
+											</option>
+											<option value="Lang121">
+												Portuguese
+											</option>
+											<option value="Lang122">
+												Pushto
+											</option>
+											<option value="Lang123">
+												Romansh
+											</option>
+											<option value="Lang124">
+												Romanian
+											</option>
+											<option value="Lang125">
+												Rundi
+											</option>
+											<option value="Lang126">
+											Russian
+											</option>
+											<option value="Lang127">
+												Sango
+											</option>
+											<option value="Lang128">
+												Sanskrit
+											</option>
+											<option value="Lang129">
+												Sinhala
+											</option>
+											<option value="Lang130">
+												Slovak
+											</option>
+											<option value="Lang131">
+												Slovenian
+											</option>
+											<option value="Lang132">
+												Samoan
+											</option>
+											<option value="Lang133">
+												Shona
+											</option>
+											<option value="Lang134">
+												Sindhi
+											</option>
+											<option value="Lang135">
+												Somali
+											</option>
+											<option value="Lang136">
+												Sotho
+											</option>
+											<option value="Lang137">
+												Spanish
+											</option>
+											<option value="Lang138">
+												Sardinian
+											</option>
+											<option value="Lang139">
+												Serbian
+											</option>
+											<option value="Lang140">
+												Swati
+											</option>
+											<option value="Lang141">
+												Sundanese
+											</option>
+											<option value="Lang142">
+												Swahili
+											</option>
+											<option value="Lang143">
+											Swedish
+											</option>
+											<option value="Lang144">
+												Tahitian
+											</option>
+											<option value="Lang145">
+												Tamil
+											</option>
+											<option value="Lang146">
+												Tatar
+											</option>
+											<option value="Lang147">
+												Telugu
+											</option>
+											<option value="Lang148">
+												Tajik
+											</option>
+											<option value="Lang149">
+												Tagalog
+											</option>
+											<option value="Lang150">
+												Thai
+											</option>
+											<option value="Lang151">
+											Tibetan
+											</option>
+											<option value="Lang152">
+												Tigrinya
+											</option>
+											<option value="Lang153">
+												Tonga
+											</option>
+											<option value="Lang154">
+												Tswana
+											</option>
+											<option value="Lang155">
+												Tsonga
+											</option>
+											<option value="Lang156">
+												Turkish
+											</option>
+											<option value="Lang157">
+												Twi
+											</option>
+											<option value="Lang158">
+												Ukrainian
+											</option>
+											<option value="Lang159">
+												Urdu
+											</option>
+											<option value="Lang160">
+												Venda
+											</option>
+											<option value="Lang161">
+												Vietnamese
+											</option>
+											<option value="Lang162">
+												Welsh
+											</option>
+											<option value="Lang163">
+												Walloon
+											</option>
+											<option value="Lang164">
+												Wolof
+											</option>
+											<option value="Lang165">
+												Xhosa
+											</option>
+											<option value="Lang166">
+												Yiddish
+											</option>
+											<option value="Lang167">
+												Yoruba
+											</option>
+											<option value="Lang168">
+												Zulu
+											</option>
 										</select>
 									</div>
 									<div class="col-12">
@@ -136,10 +1135,12 @@
 			 </thead>
 			 <tbody>
 				 <tr>
+					 {% if printuser %}
 					 <td>{{printuser.full_name}}</td>
 					 <td>{{printuser.languages_spoken}}</td>
 					 <!-- <td>{{printuser.language_proficiency}}</td> -->
 					 <td>{{printuser.languages_to_learn}}</td>
+					 {% endif %}
 					 </tr>
 			 </tbody>
 		 </table>
