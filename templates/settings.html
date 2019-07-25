@@ -135,10 +135,12 @@
 			 </thead>
 			 <tbody>
 				 <tr>
+					 {% if printuser %}
 					 <td>{{printuser.full_name}}</td>
 					 <td>{{printuser.languages_spoken}}</td>
 					 <!-- <td>{{printuser.language_proficiency}}</td> -->
 					 <td>{{printuser.languages_to_learn}}</td>
+					 {% endif %}
 					 </tr>
 			 </tbody>
 		 </table>

@@ -260,12 +260,10 @@ class User(ndb.Model):
     # A database entry representing a message
     full_name = ndb.StringProperty()
     id = ndb.StringProperty()
-    languages_spoken = ndb.StringProperty()#repeated=True
+    languages_spoken = ndb.StringProperty() #repeated=True
     languages_to_learn = ndb.StringProperty()#repeated=True
     friends = ndb.StringProperty(repeated=True)
     timeSent = ndb.StringProperty()
-    language_proficiency = ndb.StringProperty()
-
 
 class Message(ndb.Model):
     # A database entry representing a message
@@ -335,24 +333,6 @@ class UserPage(webapp2.RequestHandler):
         'logout_url': users.create_logout_url('/'),
         }
         self.response.write(index_template.render(values))
-    # def get(self): #for a get request
-    #     user = users.get_current_user()
-    #     self.response.headers['Content-Type'] = 'text/html'
-    #     index_template = JINJA_ENV.get_template('templates/user.html')
-    #     values ={
-    #     'user': user,
-    #     'login_url': users.create_login_url('/user'),
-    #     'logout_url': users.create_logout_url('/user'),
-    #     }
-    #     self.response.write(index_template.render(values))
-    #
-    # def post(self):
-
-# class LogInPage(webapp2.RequestHandler):
-#     def get(self): #for a get request
-#
-#         self.response.headers['Content-Type'] = 'text/html'
-#         index_template = JINJA_ENV.get_template('templates/login.html')
 
 class FirstLoginCheck(webapp2.RequestHandler):
     def get(self):
@@ -564,10 +544,16 @@ class SettingsPage(webapp2.RequestHandler):
         'zh': 'Chinese',
         'zu': 'Zulu'
         }
+        printuser = User.query(User.id == user.user_id()).fetch()
+        if len(printuser) == 0:
+            printuser = None
+        else:
+            printuser = printuser[0]
+
         values = {
         'user': user,
         'logout_url': users.create_logout_url('/'),
-        'printuser' : '',
+        'printuser' : printuser,
         'languages' : languages
         }
         self.response.write(index_template.render(values))
@@ -584,7 +570,6 @@ class SettingsPage(webapp2.RequestHandler):
         newUser.languages_spoken = self.request.get('spoken')
         newUser.languages_to_learn = self.request.get('learn')
         newUser.timeSent = str(datetime.datetime.now())
-        newUser.language_proficiency = self.request.get('proguy')
         newUser.put()
 
         self.redirect('/settings')
