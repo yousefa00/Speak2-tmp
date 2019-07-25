@@ -23,12 +23,12 @@ JINJA_ENV = jinja2.Environment(
 def root_parent():
     return ndb.Key('Parent', 'default_parent')
 
-def translateSentence():
+def translateSentence(textToTranslate, sourceLang, targetLang):
     try:
         form_data = urllib.urlencode({
-            'q': 'The Great Pyramid of Giza (also known as the Pyramid of Khufu or the Pyramid of Cheops) is the oldest and largest of the three pyramids in the Giza pyramid complex.',
-            'source': 'en',
-            'target': 'es',
+            'q': textToTranslate,
+            'source': sourceLang,
+            'target': targetLang,
             'format': 'text'
         })
 
@@ -248,6 +248,7 @@ def toDict(msg):
     'sentFrom': msg.sentFrom,
     'sentTo': msg.sentTo,
     'msg': msg.msg,
+    'translated': msg.translated,
     'timeSent': msg.timeSent
     }
 
@@ -272,6 +273,7 @@ class Message(ndb.Model):
     sentTo = ndb.StringProperty()
     msg = ndb.StringProperty()
     timeSent = ndb.StringProperty()
+    translated = ndb.StringProperty()
 
 # the handler section
 class MainPage(webapp2.RequestHandler):
@@ -313,11 +315,13 @@ class ChatPage(webapp2.RequestHandler):
 
         def post(self):
             user = users.get_current_user()
-            logging.debug(user.user_id())
+            my_user = User.query(User.id == user.user_id()).fetch()[0]
+            other_user = User.query(User.id == str(self.request.get("id"))).fetch()[0]
             new_msg = Message(parent=root_parent())
             new_msg.sentFrom = user.user_id()
             new_msg.sentTo = str(self.request.get("id"))
             new_msg.msg = self.request.get("chatText")
+            new_msg.translated = translate(self.request.get("chatText"), my_user.languages_spoken, other_user.languages_spoken)
             new_msg.timeSent = str(datetime.datetime.now())
             new_msg.put()
             # redirect to '/' so that the get() version of this handler will run
