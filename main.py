@@ -604,10 +604,12 @@ class IntermediatePage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/intermediate.html')
-        me = User.query(User.id == user.user_id()).fetch()[0]
+        me = User.query(User.id == user.user_id()).fetch()
         listoffriends = []
-        for x in me.friends:
-            listoffriends.append(User.query(User.id == x).fetch()[0])
+        if len(listoffriends) >0:
+            for x in me.friends:
+                listoffriends.append(User.query(User.id == x).fetch()[0])
+
         values ={
         'user': user,
         'logout_url': users.create_logout_url('/'),
