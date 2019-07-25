@@ -15,9 +15,12 @@ function fetchMessage() {
         msgs = myJson
         table.innerHTML = "";
         for (let i = 0; i < msgs.messages.length; i++) {
+          //<span class=""></span>
           let row = table.insertRow()
           urlParams = new URLSearchParams(window.location.search);
           if (msgs.messages[i].sentTo == urlParams.get('id')){
+            let icon = document.createElement("span");
+            icon.className = "icon solid major fa-question-circle"
             let cell = row.insertCell()
             cell.innerHTML = ""
             let cell2 = row.insertCell()
