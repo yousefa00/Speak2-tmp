@@ -51,11 +51,9 @@ def translateSentence(textToTranslate, sourceLang, targetLang):
 
 
 
-        headers = {'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Bearer ' + api_key.gcpkey
-        }
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         result = urlfetch.fetch(
-            url='https://translation.googleapis.com/language/translate/v2',
+            url='https://translation.googleapis.com/language/translate/v2?key=' + api_key.gcpkey,
             payload=form_data,
             method=urlfetch.POST,
             headers=headers)
