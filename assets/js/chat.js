@@ -2,8 +2,8 @@ const table = document.querySelector('#msgTable');
 var messages = []
 
 function startTimer() {
-  const seconds = 2000; //Refreshes every two seconds
-  window.setTimeout(fetchMessage, seconds)
+  const milliseconds = 800; //Refreshes every .8 seconds
+  window.setTimeout(fetchMessage, milliseconds)
 }
 
 function fetchMessage() {
