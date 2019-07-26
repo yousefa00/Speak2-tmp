@@ -386,15 +386,39 @@ class SettingsPage(webapp2.RequestHandler):
         'user': user,
         'logout_url': users.create_logout_url('/'),
         }
-        newUser = User(parent=root_parent())
-        newUser.full_name = self.request.get('name')
-        newUser.id = user.user_id()
-        newUser.languages_spoken = self.request.get('spoken')
-        newUser.languages_to_learn = self.request.get('learn')
-        newUser.timeSent = str(datetime.datetime.now())
-        newUser.put()
+        iammyself = User.query(User.id == user.user_id()).fetch()
+        if len(iammyself) > 0:
+            iammyself[0].full_name = self.request.get('name')
+            iammyself[0].languages_spoken = self.request.get('spoken')
+            iammyself[0].languages_to_learn = self.request.get('learn')
+            iammyself[0].timeSent = str(datetime.datetime.now())
+            iammyself[0].put()
+        else:
+            newUser = User(parent=root_parent())
+            newUser.full_name = self.request.get('name')
+            newUser.id = user.user_id()
+            newUser.languages_spoken = self.request.get('spoken')
+            newUser.languages_to_learn = self.request.get('learn')
+            newUser.timeSent = str(datetime.datetime.now())
+            newUser.put()
 
         self.redirect('/settings')
+
+    # def post(self):
+    #     user = users.get_current_user()
+    #     values = {
+    #     'user': user,
+    #     'logout_url': users.create_logout_url('/'),
+    #     }
+    #     newUser = User(parent=root_parent())
+    #     newUser.full_name = self.request.get('name')
+    #     newUser.id = user.user_id()
+    #     newUser.languages_spoken = self.request.get('spoken')
+    #     newUser.languages_to_learn = self.request.get('learn')
+    #     newUser.timeSent = str(datetime.datetime.now())
+    #     newUser.put()
+    #
+    #     self.redirect('/settings')
 
 class SearchPage(webapp2.RequestHandler):
     def get(self): #for a get request
