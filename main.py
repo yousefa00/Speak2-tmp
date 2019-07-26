@@ -152,17 +152,20 @@ class UserPage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/user.html')
-        myself = User.query(User.id == user.user_id()).fetch()[0]
-        myfriends = []
-        if len(myself.friends) >0:
-            for x in myself.friends:
-                myfriends.append(User.query(User.id == x).fetch()[0])
-        values ={
-        'user': user,
-        'logout_url': users.create_logout_url('/'),
-        'myfriends' : myfriends
-        }
-        self.response.write(index_template.render(values))
+        if len(User.query(User.id == user.user_id()).fetch()) > 0:
+            myself = User.query(User.id == user.user_id()).fetch()[0]
+            myfriends = []
+            if len(myself.friends) >0:
+                for x in myself.friends:
+                    myfriends.append(User.query(User.id == x).fetch()[0])
+            values ={
+            'user': user,
+            'logout_url': users.create_logout_url('/'),
+            'myfriends' : myfriends
+            }
+            self.response.write(index_template.render(values))
+        else:
+            self.redirect('/settings')
 
 class FirstLoginCheck(webapp2.RequestHandler):
     def get(self):
@@ -457,18 +460,20 @@ class IntermediatePage(webapp2.RequestHandler):
         user = users.get_current_user()
         self.response.headers['Content-Type'] = 'text/html'
         index_template = JINJA_ENV.get_template('templates/intermediate.html')
-
-        me = User.query(User.id == user.user_id()).fetch()[0]
-        listoffriends = []
-        if len(me.friends) >0:
-            for x in me.friends:
-                listoffriends.append(User.query(User.id == x).fetch()[0])
-        values ={
-        'user': user,
-        'logout_url': users.create_logout_url('/'),
-        'listoffriends' :listoffriends
-        }
-        self.response.write(index_template.render(values))
+        if len(User.query(User.id == user.user_id()).fetch()) > 0:
+            me = User.query(User.id == user.user_id()).fetch()[0]
+            listoffriends = []
+            if len(me.friends) >0:
+                for x in me.friends:
+                    listoffriends.append(User.query(User.id == x).fetch()[0])
+            values ={
+            'user': user,
+            'logout_url': users.create_logout_url('/'),
+            'listoffriends' :listoffriends
+            }
+            self.response.write(index_template.render(values))
+        else:
+            self.redirect('/settings')
 
 class AjaxGetMessages(webapp2.RequestHandler):
     def get(self):
